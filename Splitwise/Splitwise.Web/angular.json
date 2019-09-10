@@ -1,0 +1,42 @@
+{
+  "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+  "newProjectRoot": "projects",
+  "projects": {
+    "splitwise-app": {
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "configurations": {
+            "production": {
+              "aot": true,
+              "extractCss": true,
+              "fileReplacements": [
+                {
+                  "replace": "./App/environments/environment.ts",
+                  "with": "./App/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true
+            }
+          },
+          "options": {
+            "assets": [],
+            "index": "./App/index.html",
+            "main": "./App/app/main.ts",
+            "outputPath": "./App/dist/web/",
+            "polyfills": "./App/polyfills.ts",
+            "scripts": [],
+            "styles": [],
+            "tsConfig": "./App/tsconfig.json"
+          }
+        }
+      },
+      "prefix": "app",
+      "projectType": "application",
+      "root": "App",
+      "schematics": {},
+      "sourceRoot": "App"
+    }
+  },
+  "version": 1
+}

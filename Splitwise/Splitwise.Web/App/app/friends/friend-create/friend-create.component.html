@@ -1,0 +1,33 @@
+<div class="jumbotron center-block" style="width: 60%; text-align: center; font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif">
+    <h3>Friends</h3>
+    
+    <div class="container" style="margin: 5% 0px 10% 0px; padding: 20px; border-radius: 5px; box-shadow: 5px 5px 8px #777">
+        <div *ngFor="let user of friendList">
+            <div class="form-group col-xs-6">
+                <input type="text" class="form-control" [value]="user.FullName" style="background-color: white" readonly />
+            </div>
+            <div class="form-group col-xs-6">
+                <input type="text" class="form-control" [value]="user.UserName" style="background-color: white" readonly />
+            </div>
+        </div>
+        <div *ngFor="let user of addedFriends">
+            <div class="form-group col-xs-6">
+                <input type="text" class="form-control" [value]="user.FullName" style="background-color: white" readonly />
+            </div>
+            <div class="form-group col-xs-6">
+                <input type="text" class="form-control" [value]="user.UserName" style="background-color: white" readonly />
+            </div>
+        </div>
+        <div class="form-group col-xs-6" style="margin-top: 5%;">
+            <input #FullName class="form-control" placeholder="Name" />
+        </div>
+        <div class="form-group col-xs-6" style="margin-top: 5%;">
+            <input #UserName class="form-control" placeholder="Email Address" />
+        </div>
+
+        <a class="btn btn-primary" (click)="AddFriend(FullName.value,UserName.value)" style="margin: 0px 0px 5% 0px;">Add Friend</a>
+    </div>
+    <div class="form-group">
+        <button type="submit" class="btn btn-success" (click)="Submit()">Save</button>
+    </div>
+</div>

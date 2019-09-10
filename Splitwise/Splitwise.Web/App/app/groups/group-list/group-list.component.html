@@ -1,0 +1,26 @@
+<div class="jumbotron" style="text-align: center; background-color: whitesmoke">
+    <a class="btn btn-primary btn-lg" [routerLink]="['/create-group']">Create New Group</a>
+
+    <div class="container" style="margin-top: 3%; padding: 15px; box-shadow: 10px 10px 20px #777; border-radius: 10px; background-color: ghostwhite">
+        <table class="table table-hover" style="font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif">
+            <thead style="font-weight: bold">
+                <tr>
+                    <td>Group</td>
+                    <td>Created By</td>
+                    <td>Date Created</td>
+                    <td></td>
+                    <td></td>
+                </tr>
+            </thead>
+            <tbody *ngFor="let group of groupList">
+                <tr>
+                    <td><a [routerLink]="['/groups',group.GroupID]" style="text-decoration: none; display: block; color: black; cursor: pointer">{{ group.GroupName }}</a></td>
+                    <td><a [routerLink]="['/groups',group.GroupID]" style="text-decoration: none; display: block; color: black; cursor: pointer">{{ group.CreatedBy }}</a></td>
+                    <td><a [routerLink]="['/groups',group.GroupID]" style="text-decoration: none; display: block; color: black; cursor: pointer">{{ group.DateCreated | date: 'dd/MM/yyyy' }}</a></td>
+                    <td *ngIf="currentUser.FullName === group.CreatedBy"><a class="btn btn-success" [routerLink]="['/groups/',group.GroupID,'edit-group']">Edit</a></td>
+                    <td *ngIf="currentUser.FullName === group.CreatedBy"><button class="btn btn-danger" (click)="DeleteGroup(group.GroupID)">Delete</button></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

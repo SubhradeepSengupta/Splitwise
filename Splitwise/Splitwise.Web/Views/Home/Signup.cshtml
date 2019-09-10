@@ -1,0 +1,63 @@
+﻿@model Splitwise.Repository.UserSignUpAC
+
+@{
+    ViewData["Title"] = "Signup";
+}
+
+<div class="jumbotron" style="background-color: whitesmoke; text-align: center; margin-top: 3%; box-shadow: 10px 10px 20px #777">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-3 col-sm-3">
+                <div id="leftcontainer">
+                    <div class="container" style="margin-top: 55%; font-family: 'Times New Roman', Times, serif">
+                        <p><span class="glyphicon glyphicon-ok"></span>  Create a group</p>
+                        <p><span class="glyphicon glyphicon-ok"></span>  Add members</p>
+                        <p><span class="glyphicon glyphicon-ok"></span>  Save expenses</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-6 col-sm-6" style="border-left: 1.5px solid #777; border-right: 1.5px solid #777; padding: 0px 60px; border-radius: 15px;">
+                <div id="middlecontainer">
+                    <h3 style="margin-bottom: 10%; font-weight: bold;">Sign Up</h3>
+
+                    <form asp-action="Signup" method="post" autocomplete="off" style="margin-top: 5%;">
+                        <div class="form-group" style="margin-bottom: 3%">
+                            <label asp-for="FullName"></label>
+                            <input asp-for="FullName" class="form-control" placeholder="Enter Your Name" />
+                            <span asp-validation-for="FullName" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group" style="margin-bottom: 3%">
+                            <label asp-for="UserName">Email Address</label>
+                            <input asp-for="UserName" class="form-control" placeholder="Enter Your Email Address" />
+                            <span asp-validation-for="UserName" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group" style="margin-bottom: 3%">
+                            <label asp-for="Password"></label>
+                            <input asp-for="Password" class="form-control" placeholder="Enter Your Password" />
+                            <span asp-validation-for="Password" class="text-danger"></span>
+                        </div>
+                        <div class="form-group" style="margin-bottom: 3%">
+                            <label asp-for="ConfirmPassword"></label>
+                            <input asp-for="ConfirmPassword" class="form-control" placeholder="Confirm Your Password" />
+                            <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-success">Submit</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="col-xs-3 col-sm-3">
+                <div id="rightcontainer" style="margin-top: 45%; font-family: 'Times New Roman', Times, serif;">
+                    <p><span class="glyphicon glyphicon-ok"></span>  Send reminders to friends</p>
+                    <p><span class="glyphicon glyphicon-ok"></span>  Settle up using different methods</p>
+                    <p><span class="glyphicon glyphicon-ok"></span>  Save the settlements</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="text-danger" asp-validation-summary="ModelOnly"></div>

@@ -1,0 +1,49 @@
+<div class="jumbotron center-block" style="text-align: center; font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif" *ngIf="isAvailable">
+    <h2> {{ groupDetails.GroupName }} </h2>
+    <h4> Created on : {{ groupDetails.DateCreated | date: 'medium' }} </h4>
+    <h4> Created by : {{ groupDetails.CreatedBy }} </h4>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-5" style="box-shadow: 10px 10px 20px #777; border-radius: 5px; margin: 5% 2% 0px 2%">
+                <div id="leftcontainer">
+                    <div class="container" style="margin-top: 5%; font-family: 'Times New Roman', Times, serif">
+                        <h3 style="font-weight: bold; margin-bottom: 2%;">Users</h3>
+                        <table class="table table-striped table-bordered" style="margin-top: 5%;">
+                            <thead>
+                                <tr style="font-weight: bold;">
+                                    <td>Name</td>
+                                    <td>Email Address</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let group of groupDetails.GroupUsers" style="word-break: break-all">
+                                    <td> {{ group.FullName }} </td>
+                                    <td> {{ group.UserName }} </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <a class="btn btn-primary" [routerLink]="['/groups',groupID,'add-member']" style="margin-bottom: 10%;">Add Member</a>
+            </div>
+            <div class="col-sm-6" style="box-shadow: 10px 10px 20px #777; border-radius: 5px; margin: 5% 2% 0px 2%">
+                <div id="middlecontainer">
+                    <div class="container" style="margin-top: 5%; font-family: 'Times New Roman', Times, serif">
+                        <h3 style="font-weight: bold; margin-bottom: 2%;">Expenses</h3>
+                        <table class="table table-bordered table-striped" style="margin-top: 5%;">
+                            <tbody>
+                                <tr *ngFor="let expense of expenses; let i = index">
+                                    <td [routerLink]="['/groups/', groupID, 'expenses', expense.ID, 'edit-expense']" style="cursor: pointer;">{{i+1}}.  {{expense.Payer}} owes {{expense.Amount}} to {{expense.Payee}} for <b>{{expense.ExpenseName}}</b></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <a class="btn btn-primary" [routerLink]="['/groups/',groupID,'expenses']" style="margin-bottom: 10%;">All expenses</a><br />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <a class="btn btn-success btn-lg" [routerLink]="['/groups/',groupID,'create-expense']" style="margin-top: 5%;">Create new expense</a><br />
+    <a class="btn btn-primary" [routerLink]="['/groups']" style="margin-top: 1%;">Back</a>
+</div>

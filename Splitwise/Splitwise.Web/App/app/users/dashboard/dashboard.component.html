@@ -1,0 +1,57 @@
+<div class="jumbotron center-block" style="text-align: center; font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif">
+    <div class="container" *ngIf="currentUserDataAvailable">
+        <h3>Welcome {{ currentUserData.FullName }} </h3>
+        <div class="row" style="margin-top: 5%;">
+            <div class="col-sm-4 col-md-3 col-lg-3" style="box-shadow: 10px 10px 20px #777; border-radius: 15px; padding: 15px;">
+                <h3>Friends</h3>
+                <table class="table-striped" style="width: 100%; margin: 10% 0px 10% 0px;">
+                    <thead>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let friend of friendList" style="font-size: larger">
+                            <td>{{friend.FullName}}</td>
+                            <td><i class="fa fa-times alert-danger" aria-hidden="true" style="cursor: pointer;"
+                                   (click)="removeFriend(friend.Id)" ></i></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <a class="btn btn-success" [routerLink]="['/user/', currentUserData.Id, 'add-friend']">Add Friend</a>
+            </div>
+            <div class="col-sm-4 col-md-6 col-lg-6" style="box-shadow: 10px 10px 20px #777; border-radius: 20px;">
+                <h3>Activities</h3>
+
+                <table class="table-striped" style="width: 100%; margin: 8% 0px 3% 0px;">
+                    <thead>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let activity of activityList | slice:0:4; let i = index" style="font-size: larger">
+                            <td>{{i+1}}. {{activity.Description}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <a class="btn btn-success" [routerLink]="['/current-user/activities']" style="margin-bottom: 3%;">All activities</a>
+            </div>
+            <div class="col-sm-4 col-md-3 col-lg-3" style="box-shadow: 10px 10px 20px #777; border-radius: 15px; padding: 15px;">
+                <h3>Balance</h3>
+                <table class="table-striped" style="width: 100%; margin: 10% 0px 10% 0px;">
+                    <tbody style="font-size: large">
+                        <tr>
+                            <td>1. You are owed total <b>{{totalAmountLent}}</b> Rs.</td>
+                        </tr>
+                        <tr>
+                            <td>2. You owe total <b>{{totalAmountBorrowed}}</b> Rs.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

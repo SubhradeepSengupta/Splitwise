@@ -1,0 +1,22 @@
+<div class="jumbotron center-block" style="text-align: center;">
+    <div class="container">
+        <h3>Activities</h3>
+        <table class="table-striped" style="width: 100%; margin: 5% 0px 3% 0px;">
+            <thead>
+                <tr style="font-weight: bold; font-size: larger">
+                    <td>Activity</td>
+                    <td>Date</td>
+                    <td></td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let activity of activityList; let i = index">
+                    <td>{{i+1}}. {{activity.Description}}</td>
+                    <td>{{activity.Date | date:'medium'}}</td>
+                    <td><a class="alert-danger" style="cursor: pointer" (click)="RemoveActivity(activity.ID)">Remove</a></td>
+                </tr>
+            </tbody>
+        </table>
+        <a class="btn btn-primary" [routerLink]="['/dashboard']">Back</a>
+    </div>
+</div>

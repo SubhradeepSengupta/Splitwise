@@ -1,0 +1,302 @@
+{
+  "format": 1,
+  "restore": {
+    "C:\\Users\\subhradeep\\Desktop\\Asp.net Core Test\\Splitwise\\Splitwise\\Splitwise.Web\\Splitwise.Web.csproj": {}
+  },
+  "projects": {
+    "C:\\Users\\subhradeep\\Desktop\\Asp.net Core Test\\Splitwise\\Splitwise\\Splitwise.Core\\Splitwise.Core.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\subhradeep\\Desktop\\Asp.net Core Test\\Splitwise\\Splitwise\\Splitwise.Core\\Splitwise.Core.csproj",
+        "projectName": "Splitwise.Core",
+        "projectPath": "C:\\Users\\subhradeep\\Desktop\\Asp.net Core Test\\Splitwise\\Splitwise\\Splitwise.Core\\Splitwise.Core.csproj",
+        "packagesPath": "C:\\Users\\subhradeep\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\subhradeep\\Desktop\\Asp.net Core Test\\Splitwise\\Splitwise\\Splitwise.Core\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\subhradeep\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "netcoreapp2.1"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netcoreapp2.1": {
+            "projectReferences": {
+              "C:\\Users\\subhradeep\\Desktop\\Asp.net Core Test\\Splitwise\\Splitwise\\Splitwise.Repository\\Splitwise.Repository.csproj": {
+                "projectPath": "C:\\Users\\subhradeep\\Desktop\\Asp.net Core Test\\Splitwise\\Splitwise\\Splitwise.Repository\\Splitwise.Repository.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netcoreapp2.1": {
+          "dependencies": {
+            "Microsoft.AspNetCore.App": {
+              "target": "Package",
+              "version": "[2.1.1, )"
+            },
+            "Microsoft.AspNetCore.Identity": {
+              "target": "Package",
+              "version": "[2.1.1, )"
+            },
+            "Microsoft.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[2.1.1, )"
+            },
+            "Microsoft.NETCore.App": {
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[2.1.0, )",
+              "autoReferenced": true
+            }
+          },
+          "imports": [
+            "net461"
+          ],
+          "assetTargetFallback": true,
+          "warn": true
+        }
+      }
+    },
+    "C:\\Users\\subhradeep\\Desktop\\Asp.net Core Test\\Splitwise\\Splitwise\\Splitwise.DomainModel\\Splitwise.DomainModel.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\subhradeep\\Desktop\\Asp.net Core Test\\Splitwise\\Splitwise\\Splitwise.DomainModel\\Splitwise.DomainModel.csproj",
+        "projectName": "Splitwise.DomainModel",
+        "projectPath": "C:\\Users\\subhradeep\\Desktop\\Asp.net Core Test\\Splitwise\\Splitwise\\Splitwise.DomainModel\\Splitwise.DomainModel.csproj",
+        "packagesPath": "C:\\Users\\subhradeep\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\subhradeep\\Desktop\\Asp.net Core Test\\Splitwise\\Splitwise\\Splitwise.DomainModel\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\subhradeep\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "netcoreapp2.1"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netcoreapp2.1": {
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netcoreapp2.1": {
+          "dependencies": {
+            "Microsoft.AspNetCore.App": {
+              "target": "Package",
+              "version": "[2.1.1, )"
+            },
+            "Microsoft.AspNetCore.Identity": {
+              "target": "Package",
+              "version": "[2.1.1, )"
+            },
+            "Microsoft.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[2.1.1, )"
+            },
+            "Microsoft.NETCore.App": {
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[2.1.0, )",
+              "autoReferenced": true
+            }
+          },
+          "imports": [
+            "net461"
+          ],
+          "assetTargetFallback": true,
+          "warn": true
+        }
+      }
+    },
+    "C:\\Users\\subhradeep\\Desktop\\Asp.net Core Test\\Splitwise\\Splitwise\\Splitwise.Repository\\Splitwise.Repository.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\subhradeep\\Desktop\\Asp.net Core Test\\Splitwise\\Splitwise\\Splitwise.Repository\\Splitwise.Repository.csproj",
+        "projectName": "I",
+        "projectPath": "C:\\Users\\subhradeep\\Desktop\\Asp.net Core Test\\Splitwise\\Splitwise\\Splitwise.Repository\\Splitwise.Repository.csproj",
+        "packagesPath": "C:\\Users\\subhradeep\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\subhradeep\\Desktop\\Asp.net Core Test\\Splitwise\\Splitwise\\Splitwise.Repository\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\subhradeep\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "netcoreapp2.1"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netcoreapp2.1": {
+            "projectReferences": {
+              "C:\\Users\\subhradeep\\Desktop\\Asp.net Core Test\\Splitwise\\Splitwise\\Splitwise.DomainModel\\Splitwise.DomainModel.csproj": {
+                "projectPath": "C:\\Users\\subhradeep\\Desktop\\Asp.net Core Test\\Splitwise\\Splitwise\\Splitwise.DomainModel\\Splitwise.DomainModel.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netcoreapp2.1": {
+          "dependencies": {
+            "Microsoft.AspNetCore.App": {
+              "target": "Package",
+              "version": "[2.1.1, )"
+            },
+            "Microsoft.AspNetCore.Identity": {
+              "target": "Package",
+              "version": "[2.1.1, )"
+            },
+            "Microsoft.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[2.1.1, )"
+            },
+            "Microsoft.NETCore.App": {
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[2.1.0, )",
+              "autoReferenced": true
+            }
+          },
+          "imports": [
+            "net461"
+          ],
+          "assetTargetFallback": true,
+          "warn": true
+        }
+      }
+    },
+    "C:\\Users\\subhradeep\\Desktop\\Asp.net Core Test\\Splitwise\\Splitwise\\Splitwise.Web\\Splitwise.Web.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\subhradeep\\Desktop\\Asp.net Core Test\\Splitwise\\Splitwise\\Splitwise.Web\\Splitwise.Web.csproj",
+        "projectName": "Splitwise.Web",
+        "projectPath": "C:\\Users\\subhradeep\\Desktop\\Asp.net Core Test\\Splitwise\\Splitwise\\Splitwise.Web\\Splitwise.Web.csproj",
+        "packagesPath": "C:\\Users\\subhradeep\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\subhradeep\\Desktop\\Asp.net Core Test\\Splitwise\\Splitwise\\Splitwise.Web\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\subhradeep\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "netcoreapp2.1"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netcoreapp2.1": {
+            "projectReferences": {
+              "C:\\Users\\subhradeep\\Desktop\\Asp.net Core Test\\Splitwise\\Splitwise\\Splitwise.Core\\Splitwise.Core.csproj": {
+                "projectPath": "C:\\Users\\subhradeep\\Desktop\\Asp.net Core Test\\Splitwise\\Splitwise\\Splitwise.Core\\Splitwise.Core.csproj"
+              },
+              "C:\\Users\\subhradeep\\Desktop\\Asp.net Core Test\\Splitwise\\Splitwise\\Splitwise.DomainModel\\Splitwise.DomainModel.csproj": {
+                "projectPath": "C:\\Users\\subhradeep\\Desktop\\Asp.net Core Test\\Splitwise\\Splitwise\\Splitwise.DomainModel\\Splitwise.DomainModel.csproj"
+              },
+              "C:\\Users\\subhradeep\\Desktop\\Asp.net Core Test\\Splitwise\\Splitwise\\Splitwise.Repository\\Splitwise.Repository.csproj": {
+                "projectPath": "C:\\Users\\subhradeep\\Desktop\\Asp.net Core Test\\Splitwise\\Splitwise\\Splitwise.Repository\\Splitwise.Repository.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netcoreapp2.1": {
+          "dependencies": {
+            "FontAwesome": {
+              "target": "Package",
+              "version": "[4.7.0, )"
+            },
+            "Microsoft.AspNetCore.App": {
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[2.1.1, )",
+              "autoReferenced": true
+            },
+            "Microsoft.AspNetCore.Identity": {
+              "target": "Package",
+              "version": "[2.1.1, )"
+            },
+            "Microsoft.AspNetCore.Razor.Design": {
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[2.1.2, )"
+            },
+            "Microsoft.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[2.1.1, )"
+            },
+            "Microsoft.NETCore.App": {
+              "target": "Package",
+              "version": "[2.1.0, )",
+              "autoReferenced": true
+            },
+            "Microsoft.TypeScript.MSBuild": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[3.6.0, )"
+            },
+            "Microsoft.VisualStudio.Web.CodeGeneration.Design": {
+              "target": "Package",
+              "version": "[2.1.9, )"
+            }
+          },
+          "imports": [
+            "net461"
+          ],
+          "assetTargetFallback": true,
+          "warn": true
+        }
+      }
+    }
+  }
+}

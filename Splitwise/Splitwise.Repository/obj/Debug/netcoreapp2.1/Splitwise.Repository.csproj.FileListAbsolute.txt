@@ -1,0 +1,14 @@
+C:\Users\subhradeep\Desktop\Asp.net Core Test\Splitwise\Splitwise\Splitwise.Repository\obj\Debug\netcoreapp2.1\Splitwise.Repository.csprojAssemblyReference.cache
+C:\Users\subhradeep\Desktop\Asp.net Core Test\Splitwise\Splitwise\Splitwise.Repository\obj\Debug\netcoreapp2.1\Splitwise.Repository.csproj.CoreCompileInputs.cache
+C:\Users\subhradeep\Desktop\Asp.net Core Test\Splitwise\Splitwise\Splitwise.Repository\obj\Debug\netcoreapp2.1\Splitwise.Repository.AssemblyInfoInputs.cache
+C:\Users\subhradeep\Desktop\Asp.net Core Test\Splitwise\Splitwise\Splitwise.Repository\obj\Debug\netcoreapp2.1\Splitwise.Repository.AssemblyInfo.cs
+C:\Users\subhradeep\Desktop\Asp.net Core Test\Splitwise\Splitwise\Splitwise.Repository\bin\Debug\netcoreapp2.1\I.deps.json
+C:\Users\subhradeep\Desktop\Asp.net Core Test\Splitwise\Splitwise\Splitwise.Repository\bin\Debug\netcoreapp2.1\I.runtimeconfig.json
+C:\Users\subhradeep\Desktop\Asp.net Core Test\Splitwise\Splitwise\Splitwise.Repository\bin\Debug\netcoreapp2.1\I.runtimeconfig.dev.json
+C:\Users\subhradeep\Desktop\Asp.net Core Test\Splitwise\Splitwise\Splitwise.Repository\bin\Debug\netcoreapp2.1\I.dll
+C:\Users\subhradeep\Desktop\Asp.net Core Test\Splitwise\Splitwise\Splitwise.Repository\bin\Debug\netcoreapp2.1\I.pdb
+C:\Users\subhradeep\Desktop\Asp.net Core Test\Splitwise\Splitwise\Splitwise.Repository\bin\Debug\netcoreapp2.1\Splitwise.DomainModel.dll
+C:\Users\subhradeep\Desktop\Asp.net Core Test\Splitwise\Splitwise\Splitwise.Repository\bin\Debug\netcoreapp2.1\Splitwise.DomainModel.pdb
+C:\Users\subhradeep\Desktop\Asp.net Core Test\Splitwise\Splitwise\Splitwise.Repository\obj\Debug\netcoreapp2.1\Splitwise.Repository.csproj.CopyComplete
+C:\Users\subhradeep\Desktop\Asp.net Core Test\Splitwise\Splitwise\Splitwise.Repository\obj\Debug\netcoreapp2.1\I.dll
+C:\Users\subhradeep\Desktop\Asp.net Core Test\Splitwise\Splitwise\Splitwise.Repository\obj\Debug\netcoreapp2.1\I.pdb

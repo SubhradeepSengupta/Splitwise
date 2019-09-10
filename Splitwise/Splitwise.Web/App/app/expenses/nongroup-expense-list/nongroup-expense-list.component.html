@@ -1,0 +1,30 @@
+<div class="jumbotron center-block" style="text-align: center;">
+    <h3>Non Group Expenses</h3>
+
+    <div class="container">
+        <table class="table table-striped" style="padding: 5px; margin-top: 5%;">
+            <thead>
+                <tr style="font-weight: bold; text-transform: uppercase">
+                    <td>Expense Name</td>
+                    <td>Paid By</td>
+                    <td>Payer</td>
+                    <td>Amount</td>
+                    <td></td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let expense of expenseList">
+                    <td style="font-weight: bold;">{{expense.ExpenseName}}</td>
+                    <td>{{expense.Payee}}</td>
+                    <td>{{expense.Payer}}</td>
+                    <td>{{expense.Amount}}</td>
+                    <td><button class="btn btn-danger btn-sm" (click)="DeleteExpense(expense.ID)">Delete</button></td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="form-group" style="margin-top: 3%;">
+            <a class="btn btn-success" [routerLink]="['/nongroup-expense/create']">New Nongroup Expense</a>
+        </div>
+        <a class="btn btn-primary" [routerLink]="['/groups']">Back</a>
+    </div>
+</div>

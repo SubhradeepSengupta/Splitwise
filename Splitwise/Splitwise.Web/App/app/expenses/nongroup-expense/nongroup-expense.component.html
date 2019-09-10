@@ -1,0 +1,144 @@
+<div class="jumbotron center-block" style="width: 60%; text-align: center;">
+    <h3>Add Expense</h3>
+
+    <form autocomplete="off">
+        <div class="container" style="margin: 5% 0px 5% 0px;">
+            <div class="form-group">
+                <label style="font-size: large;">Expense On</label>
+                <input type="text" class="form-control" placeholder="Expense name"
+                       name="Name" [(ngModel)]="expenseData.Name" />
+            </div>
+
+            <div class="container" style="padding:25px; margin-top: 5%; border-radius: 5px; box-shadow: 5px 5px 8px #777">
+                <div class="form-group col-xs-6">
+                    <label>Amount</label>
+                    <input type="text" class="form-control" placeholder="Enter amount"
+                           name="Amount" [(ngModel)]="expenseData.Amount" />
+                </div>
+                <div class="form-group col-xs-6" style="margin: 0px 0px 5% 0px;">
+                    <label>Date</label>
+                    <input type="datetime-local" class="form-control"
+                           name="Date" [(ngModel)]="expenseData.Date" />
+                </div>
+
+                <!--<div class="form-group">
+                    <label>Paid By</label>
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Enter Email"
+                               name="Payee" [(ngModel)]="expenseData.Payee" (change)="AddUser(expenseData.Payee)" />
+                    </div>
+                </div>
+
+                <h4 style="margin-top: 5%;">Include Users</h4>
+
+                <table class="table table-bordered table-striped">
+                    <tbody>
+                        <tr *ngFor="let user of expenseData.IncludedUsers; let i = index;">
+                            <td>{{i+1}}. {{user.UserName}}</td>
+                            <td><button class="btn btn-danger btn-sm" (click)="RemoveUser(user.UserName)">Remove</button></td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <div class="form-group" style="margin-top: 5%;">
+                    <input #UserName class="form-control" placeholder="Email Address" />
+                </div>-->
+                <!--<a class="btn btn-primary" (click)="AddUser(UserName.value)">Add User</a>-->
+
+                <div class="form-group">
+                    <label>Paid By</label>
+                    <select class="form-control"
+                            name="Payee" [(ngModel)]="expenseData.Payee" (change)="getAllFriends(expenseData.Payee)" required>
+                        <option selected disabled value="">--Select--</option>
+                        <option [value]="currentUserData.Id" *ngIf="currentUser">{{currentUserData.FullName}}</option>
+                        <option [value]="individualUserData.Id" *ngIf="individualUser">{{individualUserData.FullName}}</option>
+                        <option *ngFor="let user of friendList" [value]="user.Id">{{user.FullName}}</option>
+                    </select>
+                </div>
+
+                <div class="form-group col-xs-6" *ngIf="friendsAvailable">
+                    <label style="font-size: medium;">Include</label>
+                    <div class="form-check" style="margin-bottom: 3%;" *ngFor="let users of friendList">
+                        <input class="form-check-input" type="checkbox" (click)="AddUser(users.Id, users.FullName)">
+                        <label class="form-check-label">
+                            &nbsp; {{ users.FullName }}
+                        </label>
+                    </div>
+                </div>
+
+                <div class="form-group" style="margin: 5% 0px 5% 0px">
+                    <label style="font-size: medium;">Split As</label><br />
+                    <input type="radio" name="splittype" [(ngModel)]="expenseData.SplitType" (change)="SplitSelect()" value="Equal"> Equal<br />
+                    <input type="radio" name="splittype" [(ngModel)]="expenseData.SplitType" (change)="SplitSelect()" value="Exact"> Exact Amount<br />
+                    <input type="radio" name="splittype" [(ngModel)]="expenseData.SplitType" (change)="SplitSelect()" value="Percentage"> Percentage
+                </div>
+            </div>
+            <div class="container" style="margin: 5% 0px 5% 0px;">
+                <div *ngIf="expenseData.SplitType === 'Equal'">
+                    <h3>Equally</h3>
+                    <table class="table table-striped table-bordered">
+                        <thead>
+                            <tr>
+                                <td>User</td>
+                                <td>Amount</td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let user of expenseData.IncludedUsers">
+                                <td>{{user.UserName}}</td>
+                                <td>
+                                    <input type="text" class="form-control" #EqualAmount placeholder="Amount" readonly
+                                           name="UserAmount" [(ngModel)]="user.UserAmount" />
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div *ngIf="expenseData.SplitType === 'Exact'">
+                    <h3>Exact Amount</h3>
+                    <table class="table table-striped table-bordered">
+                        <thead>
+                            <tr>
+                                <td>User</td>
+                                <td>Amount</td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let user of expenseData.IncludedUsers">
+                                <td>{{user.UserName}}</td>
+                                <td>
+                                    <input type="text" class="form-control" #ExactAmount placeholder="Enter amount"
+                                           name="UserAmount" [(ngModel)]="user.UserAmount" />
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div *ngIf="expenseData.SplitType === 'Percentage'">
+                    <h3>Percentage</h3>
+                    <table class="table table-striped table-bordered">
+                        <thead>
+                            <tr>
+                                <td>User</td>
+                                <td>Percentage</td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let user of expenseData.IncludedUsers">
+                                <td>{{user.UserName}}</td>
+                                <td>
+                                    <input type="text" class="form-control" #Percentage placeholder="Enter percentage"
+                                           name="Percentage" [(ngModel)]="user.Percentage" />
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="form-group">
+                <textarea class="form-control rounded-0" rows="3" cols="15" name="Note" [(ngModel)]="expenseData.Note" placeholder="Notes"></textarea>
+            </div>
+        </div>
+        <button type="submit" class="btn btn-success" (click)="Submit()">Save</button>
+    </form>
+</div>

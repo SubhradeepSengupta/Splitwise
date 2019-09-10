@@ -1,0 +1,6 @@
+.vs/
+node_modules
+Splitwise.Web/App/app/*.js
+Splitwise.Web/App/app/*.js.map
+Splitwise.Web/App/app/**/*.js
+Splitwise.Web/App/app/**/*.js.map

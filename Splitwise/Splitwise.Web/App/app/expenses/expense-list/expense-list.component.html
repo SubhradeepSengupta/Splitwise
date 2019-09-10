@@ -1,0 +1,27 @@
+<div class="jumbotron center-block" style="width: 70%; text-align: center;" *ngIf="isAvailable">
+    <div class="container">
+        <h4>{{ groupDetails.GroupName }} ( {{ groupDetails.DateCreated | date: 'medium' }} )</h4>
+
+        <table class="table table-striped" style="padding: 5px; margin-top: 5%;">
+            <thead>
+                <tr style="font-weight: bold; text-transform: uppercase">
+                    <td>Expense Name</td>
+                    <td>Paid By</td>
+                    <td>Payer</td>
+                    <td>Amount</td>
+                    <td></td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let expense of expenseList">
+                    <td style="font-weight: bold;">{{expense.ExpenseName}}</td>
+                    <td>{{expense.Payee}}</td>
+                    <td>{{expense.Payer}}</td>
+                    <td>{{expense.Amount}}</td>
+                    <td><button class="btn btn-danger btn-sm" (click)="DeleteExpense(groupId, expense.ID)">Delete</button></td>
+                </tr>
+            </tbody>
+        </table>
+        <a class="btn btn-primary" style="margin-top: 5%;" [routerLink]="['/groups',groupId]">Back</a>
+    </div>
+</div>

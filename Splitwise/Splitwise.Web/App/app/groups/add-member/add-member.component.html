@@ -1,0 +1,27 @@
+<title>Add Member</title>
+<div class="jumbotron center-block" style="width: 50%; text-align: center" *ngIf="isAvailable">
+    <h4> Add Members </h4>
+    <h3> {{ currentGroup.GroupName }} </h3>
+
+    <div class="container">
+        <h3 style="font-weight: bold;">Members</h3><br />
+
+        <div *ngFor="let user of currentGroup.GroupUsers">
+            <div class="form-group col-xs-6">
+                <input type="text" class="form-control" [value]="user.FullName" style="background-color: white" readonly />
+            </div>
+            <div class="form-group col-xs-6">
+                <input type="text" class="form-control" [value]="user.UserName" style="background-color: white" readonly />
+            </div>
+        </div>
+
+        <div class="form-group col-xs-6" style="margin-top: 5%;">
+            <input #FullName class="form-control" placeholder="Name" />
+        </div>
+        <div class="form-group col-xs-6" style="margin-top: 5%;">
+            <input #UserName class="form-control" placeholder="Email Address" />
+        </div>
+        <button class="btn btn-success" (click)="AddMember(FullName.value,UserName.value)" style="margin: 5% 0px 5% 0px;">Add Member</button>
+    </div>
+    <button class="btn btn-success" (click)="Save()">Save</button>
+</div>
