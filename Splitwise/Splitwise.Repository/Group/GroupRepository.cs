@@ -144,10 +144,9 @@ namespace Splitwise.Repository.Group
             await _context.UserGroupMappers.AddAsync(newUserGroup);
             await SaveChangesAsync();
 
-            var users = await _context.Users.Select(u => u.UserName).ToListAsync();
-
             for (int i = 0; i < group.UserGroupMapper.Count; i++)
             {
+                var users = await _context.Users.Select(u => u.UserName).ToListAsync();
                 UserGroupMapper newUserGroupMapper = new UserGroupMapper();
 
                 var newUser = new ApplicationUser
@@ -189,6 +188,39 @@ namespace Splitwise.Repository.Group
                             FriendID = newUserGroupMapper.UserID
                         });
 
+                        for (int j = i + 1; j < group.UserGroupMapper.Count; j++)
+                        {
+                            if (users.Contains(group.UserGroupMapper[j].UserName.ToLower()))
+                            {
+                                newFriend.Add(new Friend
+                                {
+                                    UserID = newUserGroupMapper.UserID,
+                                    FriendID = _userManager.FindByNameAsync(group.UserGroupMapper[j].UserName).Result.Id
+                                });
+                            }
+                            else
+                            {
+                                var newMember = new ApplicationUser
+                                {
+                                    FullName = group.UserGroupMapper[j].FullName,
+                                    UserName = group.UserGroupMapper[j].UserName
+                                };
+
+                                var result = await _userManager.CreateAsync(newMember, "DefaultPassword");
+
+                                if (result.Succeeded)
+                                {
+                                    newFriend.Add(new Friend
+                                    {
+                                        UserID = newUserGroupMapper.UserID,
+                                        FriendID = _userManager.FindByNameAsync(group.UserGroupMapper[j].UserName).Result.Id
+                                    });
+                                }
+                            }
+                        }
+                    }
+                    else
+                    {
                         for (int j = i + 1; j < group.UserGroupMapper.Count; j++)
                         {
                             if (users.Contains(group.UserGroupMapper[j].UserName.ToLower()))
@@ -373,6 +405,17 @@ namespace Splitwise.Repository.Group
                             FriendID = newUsers.UserID
                         });
 
+                        for (int j = i + 1; j < user.Count; j++)
+                        {
+                            newFriend.Add(new Friend
+                            {
+                                UserID = newUsers.UserID,
+                                FriendID = _userManager.FindByNameAsync(user[j].UserName).Result.Id
+                            });
+                        }
+                    }
+                    else
+                    {
                         for (int j = i + 1; j < user.Count; j++)
                         {
                             newFriend.Add(new Friend
