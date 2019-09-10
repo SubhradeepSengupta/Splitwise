@@ -180,6 +180,8 @@ namespace Splitwise.Repository.Group
 
                 if (friendList.Count != 0)
                 {
+                    List<Friend> userFriendList = await _context.Friends.Where(u => u.UserID.Equals(newUserGroupMapper.UserID) || u.FriendID.Equals(newUserGroupMapper.UserID)).ToListAsync();
+
                     if (!friendList.Any(f => f.FriendID.Equals(newUserGroupMapper.UserID) || f.UserID.Equals(newUserGroupMapper.UserID)))
                     {
                         newFriend.Add(new Friend
@@ -192,11 +194,14 @@ namespace Splitwise.Repository.Group
                         {
                             if (users.Contains(group.UserGroupMapper[j].UserName.ToLower()))
                             {
-                                newFriend.Add(new Friend
+                                if (!userFriendList.Any(f => f.FriendID.Equals(_userManager.FindByNameAsync(group.UserGroupMapper[j].UserName).Result.Id) || f.UserID.Equals(_userManager.FindByNameAsync(group.UserGroupMapper[j].UserName).Result.Id)))
                                 {
-                                    UserID = newUserGroupMapper.UserID,
-                                    FriendID = _userManager.FindByNameAsync(group.UserGroupMapper[j].UserName).Result.Id
-                                });
+                                    newFriend.Add(new Friend
+                                    {
+                                        UserID = newUserGroupMapper.UserID,
+                                        FriendID = _userManager.FindByNameAsync(group.UserGroupMapper[j].UserName).Result.Id
+                                    });
+                                }
                             }
                             else
                             {
@@ -210,11 +215,14 @@ namespace Splitwise.Repository.Group
 
                                 if (result.Succeeded)
                                 {
-                                    newFriend.Add(new Friend
+                                    if (!userFriendList.Any(f => f.FriendID.Equals(_userManager.FindByNameAsync(group.UserGroupMapper[j].UserName).Result.Id) || f.UserID.Equals(_userManager.FindByNameAsync(group.UserGroupMapper[j].UserName).Result.Id)))
                                     {
-                                        UserID = newUserGroupMapper.UserID,
-                                        FriendID = _userManager.FindByNameAsync(group.UserGroupMapper[j].UserName).Result.Id
-                                    });
+                                        newFriend.Add(new Friend
+                                        {
+                                            UserID = newUserGroupMapper.UserID,
+                                            FriendID = _userManager.FindByNameAsync(group.UserGroupMapper[j].UserName).Result.Id
+                                        });
+                                    }
                                 }
                             }
                         }
@@ -225,11 +233,14 @@ namespace Splitwise.Repository.Group
                         {
                             if (users.Contains(group.UserGroupMapper[j].UserName.ToLower()))
                             {
-                                newFriend.Add(new Friend
+                                if (!userFriendList.Any(f => f.FriendID.Equals(_userManager.FindByNameAsync(group.UserGroupMapper[j].UserName).Result.Id) || f.UserID.Equals(_userManager.FindByNameAsync(group.UserGroupMapper[j].UserName).Result.Id)))
                                 {
-                                    UserID = newUserGroupMapper.UserID,
-                                    FriendID = _userManager.FindByNameAsync(group.UserGroupMapper[j].UserName).Result.Id
-                                });
+                                    newFriend.Add(new Friend
+                                    {
+                                        UserID = newUserGroupMapper.UserID,
+                                        FriendID = _userManager.FindByNameAsync(group.UserGroupMapper[j].UserName).Result.Id
+                                    });
+                                }
                             }
                             else
                             {
@@ -243,11 +254,14 @@ namespace Splitwise.Repository.Group
 
                                 if (result.Succeeded)
                                 {
-                                    newFriend.Add(new Friend
+                                    if (!userFriendList.Any(f => f.FriendID.Equals(_userManager.FindByNameAsync(group.UserGroupMapper[j].UserName).Result.Id) || f.UserID.Equals(_userManager.FindByNameAsync(group.UserGroupMapper[j].UserName).Result.Id)))
                                     {
-                                        UserID = newUserGroupMapper.UserID,
-                                        FriendID = _userManager.FindByNameAsync(group.UserGroupMapper[j].UserName).Result.Id
-                                    });
+                                        newFriend.Add(new Friend
+                                        {
+                                            UserID = newUserGroupMapper.UserID,
+                                            FriendID = _userManager.FindByNameAsync(group.UserGroupMapper[j].UserName).Result.Id
+                                        });
+                                    }
                                 }
                             }
                         }
@@ -290,7 +304,7 @@ namespace Splitwise.Repository.Group
                                 });
                             }
                         }
-                        
+
                     }
                 }
 
@@ -360,7 +374,7 @@ namespace Splitwise.Repository.Group
             List<Friend> friendList = await _context.Friends.Where(u => u.UserID.Equals(currentUserId) || u.FriendID.Equals(currentUserId)).ToListAsync();
             List<Friend> newFriend = new List<Friend>();
             string group = await _context.Groups.Where(g => g.ID == groupId).Select(g => g.Name).FirstOrDefaultAsync();
-            var groupUsers = await _context.UserGroupMappers.Where(u => u.GroupID == groupId).ToListAsync(); 
+            var groupUsers = await _context.UserGroupMappers.Where(u => u.GroupID == groupId).ToListAsync();
             var allUsers = await _context.Users.Select(u => u.UserName).ToListAsync();
 
             for (int i = 0; i < user.Count; i++)
