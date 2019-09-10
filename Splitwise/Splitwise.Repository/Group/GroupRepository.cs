@@ -355,12 +355,14 @@ namespace Splitwise.Repository.Group
         {
             Activity activity = new Activity();
             var groupToBeDeleted = await _context.Groups.FindAsync(groupId);
+            var userGroup = await _context.UserExpenseMappers.Where(u => u.Expenses.GroupID == groupId).ToListAsync();
             if (groupToBeDeleted != null)
             {
                 groupToBeDeleted.IsDeleted = true;
                 activity.UserID = groupToBeDeleted.CreatedBy;
                 activity.Date = DateTime.Now;
                 activity.Description = $"You deleted the group {groupToBeDeleted.Name}";
+                _context.UserExpenseMappers.RemoveRange(userGroup);
                 _context.Groups.Update(groupToBeDeleted);
                 await _context.Activities.AddAsync(activity);
                 return true;
@@ -375,11 +377,18 @@ namespace Splitwise.Repository.Group
             List<Friend> newFriend = new List<Friend>();
             string group = await _context.Groups.Where(g => g.ID == groupId).Select(g => g.Name).FirstOrDefaultAsync();
             var groupUsers = await _context.UserGroupMappers.Where(u => u.GroupID == groupId).ToListAsync();
-            var allUsers = await _context.Users.Select(u => u.UserName).ToListAsync();
+
 
             for (int i = 0; i < user.Count; i++)
             {
+                var allUsers = await _context.Users.Select(u => u.UserName).ToListAsync();
                 var newUsers = new UserGroupMapper();
+
+                var newUser = new ApplicationUser
+                {
+                    FullName = user[i].FullName,
+                    UserName = user[i].UserName
+                };
 
                 if (allUsers.Contains(user[i].UserName.ToLower()))
                 {
@@ -391,12 +400,6 @@ namespace Splitwise.Repository.Group
                 }
                 else
                 {
-                    var newUser = new ApplicationUser
-                    {
-                        FullName = user[i].FullName,
-                        UserName = user[i].UserName
-                    };
-
                     var result = await _userManager.CreateAsync(newUser, "DefaultPassword");
 
                     if (result.Succeeded)
@@ -411,6 +414,8 @@ namespace Splitwise.Repository.Group
 
                 if (friendList.Count != 0)
                 {
+                    List<Friend> userFriendList = await _context.Friends.Where(u => u.UserID.Equals(newUsers.UserID) || u.FriendID.Equals(newUsers.UserID)).ToListAsync();
+
                     if (!friendList.Any(f => f.FriendID.Equals(newUsers.UserID) || f.UserID.Equals(newUsers.UserID)))
                     {
                         newFriend.Add(new Friend
@@ -421,22 +426,78 @@ namespace Splitwise.Repository.Group
 
                         for (int j = i + 1; j < user.Count; j++)
                         {
-                            newFriend.Add(new Friend
+                            if (allUsers.Contains(user[j].UserName.ToLower()))
                             {
-                                UserID = newUsers.UserID,
-                                FriendID = _userManager.FindByNameAsync(user[j].UserName).Result.Id
-                            });
+                                if (!userFriendList.Any(f => f.FriendID.Equals(_userManager.FindByNameAsync(user[j].UserName).Result.Id) || f.UserID.Equals(_userManager.FindByNameAsync(user[j].UserName).Result.Id)))
+                                {
+                                    newFriend.Add(new Friend
+                                    {
+                                        UserID = newUsers.UserID,
+                                        FriendID = _userManager.FindByNameAsync(user[j].UserName).Result.Id
+                                    });
+                                }
+                            }
+                            else
+                            {
+                                var newMember = new ApplicationUser
+                                {
+                                    FullName = user[j].FullName,
+                                    UserName = user[j].UserName
+                                };
+
+                                var result = await _userManager.CreateAsync(newMember, "DefaultPassword");
+
+                                if (result.Succeeded)
+                                {
+                                    if (!userFriendList.Any(f => f.FriendID.Equals(_userManager.FindByNameAsync(user[j].UserName).Result.Id) || f.UserID.Equals(_userManager.FindByNameAsync(user[j].UserName).Result.Id)))
+                                    {
+                                        newFriend.Add(new Friend
+                                        {
+                                            UserID = newUsers.UserID,
+                                            FriendID = _userManager.FindByNameAsync(user[j].UserName).Result.Id
+                                        });
+                                    }
+                                }
+                            }
                         }
                     }
                     else
                     {
                         for (int j = i + 1; j < user.Count; j++)
                         {
-                            newFriend.Add(new Friend
+                            if (allUsers.Contains(user[j].UserName.ToLower()))
                             {
-                                UserID = newUsers.UserID,
-                                FriendID = _userManager.FindByNameAsync(user[j].UserName).Result.Id
-                            });
+                                if (!userFriendList.Any(f => f.FriendID.Equals(_userManager.FindByNameAsync(user[j].UserName).Result.Id) || f.UserID.Equals(_userManager.FindByNameAsync(user[j].UserName).Result.Id)))
+                                {
+                                    newFriend.Add(new Friend
+                                    {
+                                        UserID = newUsers.UserID,
+                                        FriendID = _userManager.FindByNameAsync(user[j].UserName).Result.Id
+                                    });
+                                }
+                            }
+                            else
+                            {
+                                var newMember = new ApplicationUser
+                                {
+                                    FullName = user[j].FullName,
+                                    UserName = user[j].UserName
+                                };
+
+                                var result = await _userManager.CreateAsync(newMember, "DefaultPassword");
+
+                                if (result.Succeeded)
+                                {
+                                    if (!userFriendList.Any(f => f.FriendID.Equals(_userManager.FindByNameAsync(user[j].UserName).Result.Id) || f.UserID.Equals(_userManager.FindByNameAsync(user[j].UserName).Result.Id)))
+                                    {
+                                        newFriend.Add(new Friend
+                                        {
+                                            UserID = newUsers.UserID,
+                                            FriendID = _userManager.FindByNameAsync(user[j].UserName).Result.Id
+                                        });
+                                    }
+                                }
+                            }
                         }
                     }
                 }
@@ -450,21 +511,48 @@ namespace Splitwise.Repository.Group
 
                     for (int j = i + 1; j < user.Count; j++)
                     {
-                        newFriend.Add(new Friend
+                        if (allUsers.Contains(user[j].UserName.ToLower()))
                         {
-                            UserID = newUsers.UserID,
-                            FriendID = _userManager.FindByNameAsync(user[j].UserName).Result.Id
-                        });
+                            newFriend.Add(new Friend
+                            {
+                                UserID = newUsers.UserID,
+                                FriendID = _userManager.FindByNameAsync(user[j].UserName).Result.Id
+                            });
+                        }
+                        else
+                        {
+                            var newMember = new ApplicationUser
+                            {
+                                FullName = user[j].FullName,
+                                UserName = user[j].UserName
+                            };
+
+                            var result = await _userManager.CreateAsync(newMember, "DefaultPassword");
+
+                            if (result.Succeeded)
+                            {
+                                newFriend.Add(new Friend
+                                {
+                                    UserID = newUsers.UserID,
+                                    FriendID = _userManager.FindByNameAsync(user[j].UserName).Result.Id
+                                });
+                            }
+                        }
                     }
                 }
 
                 foreach (var users in groupUsers.Where(g => !g.UserID.Equals(currentUserId)))
                 {
-                    newFriend.Add(new Friend
+                    List<Friend> userFriendList = await _context.Friends.Where(u => u.UserID.Equals(newUsers.UserID) || u.FriendID.Equals(newUsers.UserID)).ToListAsync();
+
+                    if (!userFriendList.Any(f => f.FriendID.Equals(users.UserID) || f.UserID.Equals(users.UserID)))
                     {
-                        UserID = newUsers.UserID,
-                        FriendID = users.UserID
-                    });
+                        newFriend.Add(new Friend
+                        {
+                            UserID = newUsers.UserID,
+                            FriendID = users.UserID
+                        });
+                    }       
                 }
 
                 activityList.Add(new Activity
