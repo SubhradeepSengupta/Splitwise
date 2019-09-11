@@ -9,19 +9,21 @@ import { CreateUserMapper, GroupDetails } from '../shared/group.model';
     styleUrls: ['./add-member.component.css']
 })
 export class AddMemberComponent implements OnInit {
-    @ViewChild('FullName') FullName: ElementRef;
-    @ViewChild('UserName') UserName: ElementRef;
 
     groupID: number;
     currentGroup: any;
     newUsers: CreateUserMapper[];
     isAvailable: boolean;
+    newlyAddedFulllName: string;
+    newlyAddedUserName: string;
 
     constructor(private _route: ActivatedRoute, private _groupService: GroupService, private _router: Router) {
         this.groupID = +this._route.snapshot.paramMap.get('id');
         this.currentGroup = new GroupDetails();
         this.newUsers = [];
         this.isAvailable = false;
+        this.newlyAddedFulllName = '';
+        this.newlyAddedUserName = '';
     }
 
     ngOnInit() {
@@ -40,8 +42,8 @@ export class AddMemberComponent implements OnInit {
         this.currentGroup.GroupUsers.push(user);
         this.newUsers.push(user);
 
-        this.FullName.nativeElement.value = '';
-        this.UserName.nativeElement.value = '';
+        this.newlyAddedFulllName = '';
+        this.newlyAddedUserName = '';
     }
 
     Save() {

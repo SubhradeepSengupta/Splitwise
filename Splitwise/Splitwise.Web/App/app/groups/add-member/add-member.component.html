@@ -16,10 +16,10 @@
         </div>
 
         <div class="form-group col-xs-6" style="margin-top: 5%;">
-            <input #FullName class="form-control" placeholder="Name" />
+            <input #FullName name="newlyAddedFulllName" [(ngModel)]="newlyAddedFulllName" class="form-control" placeholder="Name" />
         </div>
         <div class="form-group col-xs-6" style="margin-top: 5%;">
-            <input #UserName class="form-control" placeholder="Email Address" />
+            <input #UserName name="newlyAddedUserName" [(ngModel)]="newlyAddedUserName" class="form-control" placeholder="Email Address" />
         </div>
         <button class="btn btn-success" (click)="AddMember(FullName.value,UserName.value)" style="margin: 5% 0px 5% 0px;">Add Member</button>
     </div>

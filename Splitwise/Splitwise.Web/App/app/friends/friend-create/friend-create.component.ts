@@ -9,16 +9,18 @@ import { ActivatedRoute } from '@angular/router';
     styleUrls: ['./friend-create.component.css']
 })
 export class FriendCreateComponent implements OnInit {
-    @ViewChild('FullName') FullName: ElementRef;
-    @ViewChild('UserName') UserName: ElementRef;
 
     friendList: UserDetails;
     currentUserId: string;
     addedFriends: UserDetails[];
+    newlyAddedFulllName: string;
+    newlyAddedUserName: string;
 
     constructor(private _userService: UserService, private _route: ActivatedRoute) {
         this.currentUserId = this._route.snapshot.paramMap.get('id');
         this.addedFriends = [];
+        this.newlyAddedFulllName = '';
+        this.newlyAddedUserName = '';
     }
 
     ngOnInit() {
@@ -40,8 +42,8 @@ export class FriendCreateComponent implements OnInit {
 
         this.addedFriends.push(newlyAddedFriends);
 
-        this.FullName.nativeElement.value = '';
-        this.UserName.nativeElement.value = '';
+        this.newlyAddedFulllName = '';
+        this.newlyAddedUserName = '';
     }
 
     Submit() {

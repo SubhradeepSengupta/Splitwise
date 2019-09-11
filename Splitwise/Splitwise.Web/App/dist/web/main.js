@@ -1160,7 +1160,7 @@ module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"jumbotron center-block\" style=\"width: 60%; text-align: center; font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif\">\r\n    <h3>Friends</h3>\r\n    \r\n    <div class=\"container\" style=\"margin: 5% 0px 10% 0px; padding: 20px; border-radius: 5px; box-shadow: 5px 5px 8px #777\">\r\n        <div *ngFor=\"let user of friendList\">\r\n            <div class=\"form-group col-xs-6\">\r\n                <input type=\"text\" class=\"form-control\" [value]=\"user.FullName\" style=\"background-color: white\" readonly />\r\n            </div>\r\n            <div class=\"form-group col-xs-6\">\r\n                <input type=\"text\" class=\"form-control\" [value]=\"user.UserName\" style=\"background-color: white\" readonly />\r\n            </div>\r\n        </div>\r\n        <div *ngFor=\"let user of addedFriends\">\r\n            <div class=\"form-group col-xs-6\">\r\n                <input type=\"text\" class=\"form-control\" [value]=\"user.FullName\" style=\"background-color: white\" readonly />\r\n            </div>\r\n            <div class=\"form-group col-xs-6\">\r\n                <input type=\"text\" class=\"form-control\" [value]=\"user.UserName\" style=\"background-color: white\" readonly />\r\n            </div>\r\n        </div>\r\n        <div class=\"form-group col-xs-6\" style=\"margin-top: 5%;\">\r\n            <input #FullName class=\"form-control\" placeholder=\"Name\" />\r\n        </div>\r\n        <div class=\"form-group col-xs-6\" style=\"margin-top: 5%;\">\r\n            <input #UserName class=\"form-control\" placeholder=\"Email Address\" />\r\n        </div>\r\n\r\n        <a class=\"btn btn-primary\" (click)=\"AddFriend(FullName.value,UserName.value)\" style=\"margin: 0px 0px 5% 0px;\">Add Friend</a>\r\n    </div>\r\n    <div class=\"form-group\">\r\n        <button type=\"submit\" class=\"btn btn-success\" (click)=\"Submit()\">Save</button>\r\n    </div>\r\n</div>\r\n"
+module.exports = "<div class=\"jumbotron center-block\" style=\"width: 60%; text-align: center; font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif\">\r\n    <h3>Friends</h3>\r\n    \r\n    <div class=\"container\" style=\"margin: 5% 0px 10% 0px; padding: 20px; border-radius: 5px; box-shadow: 5px 5px 8px #777\">\r\n        <div *ngFor=\"let user of friendList\">\r\n            <div class=\"form-group col-xs-6\">\r\n                <input type=\"text\" class=\"form-control\" [value]=\"user.FullName\" style=\"background-color: white\" readonly />\r\n            </div>\r\n            <div class=\"form-group col-xs-6\">\r\n                <input type=\"text\" class=\"form-control\" [value]=\"user.UserName\" style=\"background-color: white\" readonly />\r\n            </div>\r\n        </div>\r\n        <div *ngFor=\"let user of addedFriends\">\r\n            <div class=\"form-group col-xs-6\">\r\n                <input type=\"text\" class=\"form-control\" [value]=\"user.FullName\" style=\"background-color: white\" readonly />\r\n            </div>\r\n            <div class=\"form-group col-xs-6\">\r\n                <input type=\"text\" class=\"form-control\" [value]=\"user.UserName\" style=\"background-color: white\" readonly />\r\n            </div>\r\n        </div>\r\n        <div class=\"form-group col-xs-6\" style=\"margin-top: 5%;\">\r\n            <input #FullName name=\"newlyAddedFulllName\" [(ngModel)]=\"newlyAddedFulllName\" class=\"form-control\" placeholder=\"Name\" />\r\n        </div>\r\n        <div class=\"form-group col-xs-6\" style=\"margin-top: 5%;\">\r\n            <input #UserName name=\"newlyAddedUserName\" [(ngModel)]=\"newlyAddedUserName\" class=\"form-control\" placeholder=\"Email Address\" />\r\n        </div>\r\n\r\n        <a class=\"btn btn-primary\" (click)=\"AddFriend(FullName.value,UserName.value)\" style=\"margin: 0px 0px 5% 0px;\">Add Friend</a>\r\n    </div>\r\n    <div class=\"form-group\">\r\n        <button type=\"submit\" class=\"btn btn-success\" (click)=\"Submit()\">Save</button>\r\n    </div>\r\n</div>\r\n"
 
 /***/ }),
 
@@ -1193,6 +1193,8 @@ let FriendCreateComponent = class FriendCreateComponent {
         this._route = _route;
         this.currentUserId = this._route.snapshot.paramMap.get('id');
         this.addedFriends = [];
+        this.newlyAddedFulllName = '';
+        this.newlyAddedUserName = '';
     }
     ngOnInit() {
         this._userService.GetAllFriends(this.currentUserId).subscribe(res => {
@@ -1207,8 +1209,8 @@ let FriendCreateComponent = class FriendCreateComponent {
         newlyAddedFriends.FullName = fullName;
         newlyAddedFriends.UserName = userName;
         this.addedFriends.push(newlyAddedFriends);
-        this.FullName.nativeElement.value = '';
-        this.UserName.nativeElement.value = '';
+        this.newlyAddedFulllName = '';
+        this.newlyAddedUserName = '';
     }
     Submit() {
         this._userService.AddFriend(this.currentUserId, this.addedFriends).subscribe(res => {
@@ -1218,14 +1220,6 @@ let FriendCreateComponent = class FriendCreateComponent {
         });
     }
 };
-__decorate([
-    core_1.ViewChild('FullName'),
-    __metadata("design:type", core_1.ElementRef)
-], FriendCreateComponent.prototype, "FullName", void 0);
-__decorate([
-    core_1.ViewChild('UserName'),
-    __metadata("design:type", core_1.ElementRef)
-], FriendCreateComponent.prototype, "UserName", void 0);
 FriendCreateComponent = __decorate([
     core_1.Component({
         selector: 'app-friend-create',
@@ -1380,13 +1374,15 @@ const common_1 = __webpack_require__(/*! @angular/common */ "../node_modules/@an
 const friend_list_component_1 = __webpack_require__(/*! ./friend-list/friend-list.component */ "./app/friends/friend-list/friend-list.component.ts");
 const friend_create_component_1 = __webpack_require__(/*! ./friend-create/friend-create.component */ "./app/friends/friend-create/friend-create.component.ts");
 const friend_edit_component_1 = __webpack_require__(/*! ./friend-edit/friend-edit.component */ "./app/friends/friend-edit/friend-edit.component.ts");
+const forms_1 = __webpack_require__(/*! @angular/forms */ "../node_modules/@angular/forms/fesm2015/forms.js");
 let FriendsModule = class FriendsModule {
 };
 FriendsModule = __decorate([
     core_1.NgModule({
         declarations: [friend_list_component_1.FriendListComponent, friend_create_component_1.FriendCreateComponent, friend_edit_component_1.FriendEditComponent],
         imports: [
-            common_1.CommonModule
+            common_1.CommonModule,
+            forms_1.FormsModule
         ]
     })
 ], FriendsModule);
@@ -1413,7 +1409,7 @@ module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<title>Add Member</title>\n<div class=\"jumbotron center-block\" style=\"width: 50%; text-align: center\" *ngIf=\"isAvailable\">\r\n    <h4> Add Members </h4>\r\n    <h3> {{ currentGroup.GroupName }} </h3>\r\n\r\n    <div class=\"container\">\r\n        <h3 style=\"font-weight: bold;\">Members</h3><br />\r\n\r\n        <div *ngFor=\"let user of currentGroup.GroupUsers\">\r\n            <div class=\"form-group col-xs-6\">\r\n                <input type=\"text\" class=\"form-control\" [value]=\"user.FullName\" style=\"background-color: white\" readonly />\r\n            </div>\r\n            <div class=\"form-group col-xs-6\">\r\n                <input type=\"text\" class=\"form-control\" [value]=\"user.UserName\" style=\"background-color: white\" readonly />\r\n            </div>\r\n        </div>\r\n\r\n        <div class=\"form-group col-xs-6\" style=\"margin-top: 5%;\">\r\n            <input #FullName class=\"form-control\" placeholder=\"Name\" />\r\n        </div>\r\n        <div class=\"form-group col-xs-6\" style=\"margin-top: 5%;\">\r\n            <input #UserName class=\"form-control\" placeholder=\"Email Address\" />\r\n        </div>\r\n        <button class=\"btn btn-success\" (click)=\"AddMember(FullName.value,UserName.value)\" style=\"margin: 5% 0px 5% 0px;\">Add Member</button>\r\n    </div>\r\n    <button class=\"btn btn-success\" (click)=\"Save()\">Save</button>\r\n</div>\n"
+module.exports = "<title>Add Member</title>\n<div class=\"jumbotron center-block\" style=\"width: 50%; text-align: center\" *ngIf=\"isAvailable\">\r\n    <h4> Add Members </h4>\r\n    <h3> {{ currentGroup.GroupName }} </h3>\r\n\r\n    <div class=\"container\">\r\n        <h3 style=\"font-weight: bold;\">Members</h3><br />\r\n\r\n        <div *ngFor=\"let user of currentGroup.GroupUsers\">\r\n            <div class=\"form-group col-xs-6\">\r\n                <input type=\"text\" class=\"form-control\" [value]=\"user.FullName\" style=\"background-color: white\" readonly />\r\n            </div>\r\n            <div class=\"form-group col-xs-6\">\r\n                <input type=\"text\" class=\"form-control\" [value]=\"user.UserName\" style=\"background-color: white\" readonly />\r\n            </div>\r\n        </div>\r\n\r\n        <div class=\"form-group col-xs-6\" style=\"margin-top: 5%;\">\r\n            <input #FullName name=\"newlyAddedFulllName\" [(ngModel)]=\"newlyAddedFulllName\" class=\"form-control\" placeholder=\"Name\" />\r\n        </div>\r\n        <div class=\"form-group col-xs-6\" style=\"margin-top: 5%;\">\r\n            <input #UserName name=\"newlyAddedUserName\" [(ngModel)]=\"newlyAddedUserName\" class=\"form-control\" placeholder=\"Email Address\" />\r\n        </div>\r\n        <button class=\"btn btn-success\" (click)=\"AddMember(FullName.value,UserName.value)\" style=\"margin: 5% 0px 5% 0px;\">Add Member</button>\r\n    </div>\r\n    <button class=\"btn btn-success\" (click)=\"Save()\">Save</button>\r\n</div>\n"
 
 /***/ }),
 
@@ -1449,6 +1445,8 @@ let AddMemberComponent = class AddMemberComponent {
         this.currentGroup = new group_model_1.GroupDetails();
         this.newUsers = [];
         this.isAvailable = false;
+        this.newlyAddedFulllName = '';
+        this.newlyAddedUserName = '';
     }
     ngOnInit() {
         this._groupService.GetGroupById(this.groupID).subscribe(res => {
@@ -1462,8 +1460,8 @@ let AddMemberComponent = class AddMemberComponent {
         let user = new group_model_1.CreateUserMapper(FullName, UserName);
         this.currentGroup.GroupUsers.push(user);
         this.newUsers.push(user);
-        this.FullName.nativeElement.value = '';
-        this.UserName.nativeElement.value = '';
+        this.newlyAddedFulllName = '';
+        this.newlyAddedUserName = '';
     }
     Save() {
         this._groupService.AddUserToGroup(this.newUsers, this.groupID).subscribe(res => {
@@ -1473,14 +1471,6 @@ let AddMemberComponent = class AddMemberComponent {
         });
     }
 };
-__decorate([
-    core_1.ViewChild('FullName'),
-    __metadata("design:type", core_1.ElementRef)
-], AddMemberComponent.prototype, "FullName", void 0);
-__decorate([
-    core_1.ViewChild('UserName'),
-    __metadata("design:type", core_1.ElementRef)
-], AddMemberComponent.prototype, "UserName", void 0);
 AddMemberComponent = __decorate([
     core_1.Component({
         selector: 'app-add-member',
@@ -1512,7 +1502,7 @@ module.exports = "label {\r\n    margin-bottom: 3%;\r\n}\r\n/*# sourceMappingURL
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"jumbotron center-block\" style=\"width: 60%; text-align: center;\">\r\n    <form #form=\"ngForm\" autocomplete=\"off\">\r\n        <div class=\"container\" style=\"padding: 15px;\" *ngIf=\"isAvailable\">\r\n            <div class=\"form-group\">\r\n                <label>Your group name</label>\r\n                <input type=\"text\" class=\"form-control\" name=\"Name\" [(ngModel)]=\"formData.Name\" placeholder=\"Enter group name\" required />\r\n            </div>\r\n            <div class=\"form-group\">\r\n                <label>Category</label>\r\n                <select class=\"form-control\" name=\"Category\" [(ngModel)]=\"formData.Category\" required>\r\n                    <option value=\"0\" selected disabled>--Select--</option>\r\n                    <option *ngFor=\"let category of categoryList\" [value]=\"category.ID\"> {{ category.Name }} </option>\r\n                </select>\r\n            </div>\r\n\r\n            <div class=\"container\" style=\"margin: 10% 0px 10% 0px; border-radius: 5px; box-shadow: 5px 5px 8px #777\">\r\n                <h4 style=\"font-weight: bold; margin-bottom: 5%;\">Members</h4>\r\n                <input type=\"text\" name=\"Id\" [(ngModel)]=\"currentUser.Id\" hidden />\r\n                <div class=\"form-group col-xs-6\">\r\n                    <label>Name</label>\r\n                    <input type=\"text\" class=\"form-control\" [value]=\"currentUser.FullName\" style=\"background-color: white\" readonly />\r\n                </div>\r\n                <div class=\"form-group col-xs-6\">\r\n                    <label>Email</label>\r\n                    <input type=\"text\" class=\"form-control\" [value]=\"currentUser.UserName\" style=\"background-color: white\" readonly />\r\n                </div>\r\n\r\n                <div *ngFor=\"let user of formData.UserGroupMapper\">\r\n                    <div class=\"form-group col-xs-6\">\r\n                        <input type=\"text\" class=\"form-control\" [value]=\"user.FullName\" style=\"background-color: white\" readonly />\r\n                    </div>\r\n                    <div class=\"form-group col-xs-6\">\r\n                        <input type=\"text\" class=\"form-control\" [value]=\"user.UserName\" style=\"background-color: white\" readonly />\r\n                    </div>\r\n                </div>\r\n\r\n                <div class=\"form-group col-xs-6\" style=\"margin-top: 5%;\">\r\n                    <input #FullName class=\"form-control\" placeholder=\"Name\" />\r\n                </div>\r\n                <div class=\"form-group col-xs-6\" style=\"margin-top: 5%;\">\r\n                    <input #UserName class=\"form-control\" placeholder=\"Email Address\" />\r\n                </div>\r\n\r\n                <button class=\"btn btn-success\" (click)=\"AddUser(FullName.value,UserName.value)\" style=\"margin: 0px 0px 5% 0px;\">Add User</button>\r\n            </div>\r\n        </div>\r\n        <label>Simplify Debts</label>\r\n        <div class=\"form-check\" style=\"margin-bottom: 3%;\">\r\n            <input class=\"form-check-input\" type=\"checkbox\" id=\"simplifydebt\" name=\"SimplifyDebts\" [(ngModel)]=\"formData.SimplifyDebts\">\r\n            <label class=\"form-check-label\" for=\"simplifydebt\">\r\n                &nbsp; True\r\n            </label>\r\n        </div>\r\n        <div class=\"form-group\">\r\n            <textarea class=\"form-control rounded-0\" name=\"Note\" [(ngModel)]=\"formData.Note\" rows=\"3\" cols=\"15\" placeholder=\"Notes\"></textarea>\r\n        </div>\r\n        <div class=\"form-group\">\r\n            <button type=\"submit\" class=\"btn btn-success\" (click)=\"OnSubmit()\" [disabled]=\"form.invalid\">Save</button>\r\n        </div>\r\n    </form>\r\n</div>"
+module.exports = "<div class=\"jumbotron center-block\" style=\"width: 60%; text-align: center;\">\r\n    <form #form=\"ngForm\" autocomplete=\"off\">\r\n        <div class=\"container\" style=\"padding: 15px;\" *ngIf=\"isAvailable\">\r\n            <div class=\"form-group\">\r\n                <label>Your group name</label>\r\n                <input type=\"text\" class=\"form-control\" name=\"Name\" [(ngModel)]=\"formData.Name\" placeholder=\"Enter group name\" required />\r\n            </div>\r\n            <div class=\"form-group\">\r\n                <label>Category</label>\r\n                <select class=\"form-control\" name=\"Category\" [(ngModel)]=\"formData.Category\" required>\r\n                    <option value=\"0\" selected disabled>--Select--</option>\r\n                    <option *ngFor=\"let category of categoryList\" [value]=\"category.ID\"> {{ category.Name }} </option>\r\n                </select>\r\n            </div>\r\n\r\n            <div class=\"container\" style=\"margin: 10% 0px 10% 0px; border-radius: 5px; box-shadow: 5px 5px 8px #777\">\r\n                <h4 style=\"font-weight: bold; margin-bottom: 5%;\">Members</h4>\r\n                <input type=\"text\" name=\"Id\" [(ngModel)]=\"currentUser.Id\" hidden />\r\n                <div class=\"form-group col-xs-6\">\r\n                    <label>Name</label>\r\n                    <input type=\"text\" class=\"form-control\" [value]=\"currentUser.FullName\" style=\"background-color: white\" readonly />\r\n                </div>\r\n                <div class=\"form-group col-xs-6\">\r\n                    <label>Email</label>\r\n                    <input type=\"text\" class=\"form-control\" [value]=\"currentUser.UserName\" style=\"background-color: white\" readonly />\r\n                </div>\r\n\r\n                <div *ngFor=\"let user of formData.UserGroupMapper\">\r\n                    <div class=\"form-group col-xs-6\">\r\n                        <input type=\"text\" class=\"form-control\" [value]=\"user.FullName\" style=\"background-color: white\" readonly />\r\n                    </div>\r\n                    <div class=\"form-group col-xs-6\">\r\n                        <input type=\"text\" class=\"form-control\" [value]=\"user.UserName\" style=\"background-color: white\" readonly />\r\n                    </div>\r\n                </div>\r\n\r\n                <div class=\"form-group col-xs-6\" style=\"margin-top: 5%;\">\r\n                    <input #FullName name=\"newlyAddedFulllName\" [(ngModel)]=\"newlyAddedFulllName\" class=\"form-control\" placeholder=\"Name\" />\r\n                </div>\r\n                <div class=\"form-group col-xs-6\" style=\"margin-top: 5%;\">\r\n                    <input #UserName name=\"newlyAddedUserName\" [(ngModel)]=\"newlyAddedUserName\" class=\"form-control\" placeholder=\"Email Address\" />\r\n                </div>\r\n\r\n                <button class=\"btn btn-success\" (click)=\"AddUser(FullName.value,UserName.value)\" style=\"margin: 0px 0px 5% 0px;\">Add User</button>\r\n            </div>\r\n        </div>\r\n        <label>Simplify Debts</label>\r\n        <div class=\"form-check\" style=\"margin-bottom: 3%;\">\r\n            <input class=\"form-check-input\" type=\"checkbox\" id=\"simplifydebt\" name=\"SimplifyDebts\" [(ngModel)]=\"formData.SimplifyDebts\">\r\n            <label class=\"form-check-label\" for=\"simplifydebt\">\r\n                &nbsp; True\r\n            </label>\r\n        </div>\r\n        <div class=\"form-group\">\r\n            <textarea class=\"form-control rounded-0\" name=\"Note\" [(ngModel)]=\"formData.Note\" rows=\"3\" cols=\"15\" placeholder=\"Notes\"></textarea>\r\n        </div>\r\n        <div class=\"form-group\">\r\n            <button type=\"submit\" class=\"btn btn-success\" (click)=\"OnSubmit()\" [disabled]=\"form.invalid\">Save</button>\r\n        </div>\r\n    </form>\r\n</div>"
 
 /***/ }),
 
@@ -1550,6 +1540,8 @@ let GroupCreateComponent = class GroupCreateComponent {
         this.formData = new group_model_1.CreateGroupModel();
         this.categoryList = [];
         this.isAvailable = false;
+        this.newlyAddedFulllName = '';
+        this.newlyAddedUserName = '';
     }
     ngOnInit() {
         this._userService.GetCurrentUser().subscribe(res => {
@@ -1567,8 +1559,8 @@ let GroupCreateComponent = class GroupCreateComponent {
     AddUser(FullName, UserName) {
         let user = new group_model_1.CreateUserMapper(FullName, UserName);
         this.formData.UserGroupMapper.push(user);
-        this.FullName.nativeElement.value = '';
-        this.UserName.nativeElement.value = '';
+        this.newlyAddedFulllName = '';
+        this.newlyAddedUserName = '';
     }
     OnSubmit() {
         this._groupService.CreateGroup(this.formData).subscribe(res => {
@@ -1578,14 +1570,6 @@ let GroupCreateComponent = class GroupCreateComponent {
         });
     }
 };
-__decorate([
-    core_1.ViewChild('FullName'),
-    __metadata("design:type", core_1.ElementRef)
-], GroupCreateComponent.prototype, "FullName", void 0);
-__decorate([
-    core_1.ViewChild('UserName'),
-    __metadata("design:type", core_1.ElementRef)
-], GroupCreateComponent.prototype, "UserName", void 0);
 GroupCreateComponent = __decorate([
     core_1.Component({
         selector: 'app-group-create',

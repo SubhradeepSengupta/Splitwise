@@ -11,19 +11,21 @@ import { UserDetails } from '../../users/shared/user.model';
     styleUrls: ['./group-create.component.css']
 })
 export class GroupCreateComponent implements OnInit {
-    @ViewChild('FullName') FullName: ElementRef;
-    @ViewChild('UserName') UserName: ElementRef;
 
     currentUser: UserDetails;
     formData: CreateGroupModel;
     categoryList: Category[];
     isAvailable: boolean;
+    newlyAddedFulllName: string;
+    newlyAddedUserName: string;
 
     constructor(private _userService: UserService, private _groupService: GroupService, private _router: Router) {
         this.currentUser = new UserDetails();
         this.formData = new CreateGroupModel();
         this.categoryList = [];
         this.isAvailable = false;
+        this.newlyAddedFulllName = '';
+        this.newlyAddedUserName = '';
     }
 
     ngOnInit() {
@@ -49,8 +51,8 @@ export class GroupCreateComponent implements OnInit {
         let user = new CreateUserMapper(FullName, UserName);
         this.formData.UserGroupMapper.push(user);
 
-        this.FullName.nativeElement.value = '';
-        this.UserName.nativeElement.value = '';
+        this.newlyAddedFulllName = '';
+        this.newlyAddedUserName = '';
     }
 
     OnSubmit() {
