@@ -269,6 +269,8 @@ namespace Splitwise.Repository.Group
                 }
                 else
                 {
+                    List<Friend> userFriendList = await _context.Friends.Where(u => u.UserID.Equals(newUserGroupMapper.UserID) || u.FriendID.Equals(newUserGroupMapper.UserID)).ToListAsync();
+
                     newFriend.Add(new Friend
                     {
                         UserID = userId,
@@ -279,11 +281,14 @@ namespace Splitwise.Repository.Group
                     {
                         if (users.Contains(group.UserGroupMapper[j].UserName.ToLower()))
                         {
-                            newFriend.Add(new Friend
+                            if (!userFriendList.Any(f => f.FriendID.Equals(_userManager.FindByNameAsync(group.UserGroupMapper[j].UserName).Result.Id) || f.UserID.Equals(_userManager.FindByNameAsync(group.UserGroupMapper[j].UserName).Result.Id)))
                             {
-                                UserID = newUserGroupMapper.UserID,
-                                FriendID = _userManager.FindByNameAsync(group.UserGroupMapper[j].UserName).Result.Id
-                            });
+                                newFriend.Add(new Friend
+                                {
+                                    UserID = newUserGroupMapper.UserID,
+                                    FriendID = _userManager.FindByNameAsync(group.UserGroupMapper[j].UserName).Result.Id
+                                });
+                            }
                         }
                         else
                         {
@@ -297,11 +302,14 @@ namespace Splitwise.Repository.Group
 
                             if (result.Succeeded)
                             {
-                                newFriend.Add(new Friend
+                                if (!userFriendList.Any(f => f.FriendID.Equals(_userManager.FindByNameAsync(group.UserGroupMapper[j].UserName).Result.Id) || f.UserID.Equals(_userManager.FindByNameAsync(group.UserGroupMapper[j].UserName).Result.Id)))
                                 {
-                                    UserID = newUserGroupMapper.UserID,
-                                    FriendID = _userManager.FindByNameAsync(group.UserGroupMapper[j].UserName).Result.Id
-                                });
+                                    newFriend.Add(new Friend
+                                    {
+                                        UserID = newUserGroupMapper.UserID,
+                                        FriendID = _userManager.FindByNameAsync(group.UserGroupMapper[j].UserName).Result.Id
+                                    });
+                                }
                             }
                         }
 
@@ -552,7 +560,7 @@ namespace Splitwise.Repository.Group
                             UserID = newUsers.UserID,
                             FriendID = users.UserID
                         });
-                    }       
+                    }
                 }
 
                 activityList.Add(new Activity
