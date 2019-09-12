@@ -211,7 +211,7 @@ AppModule = __decorate([
                 },
                 {
                     path: '',
-                    redirectTo: 'groups',
+                    redirectTo: 'dashboard',
                     pathMatch: 'full'
                 }
             ])

@@ -54,15 +54,15 @@ namespace Splitwise.Core.Controllers
         [HttpPost]
         public async Task<IActionResult> Login([FromForm] UserLoginAC loginFormData)
         {
-            if(ModelState.IsValid)
+            if (ModelState.IsValid)
             {
                 var user = await _userManager.FindByNameAsync(loginFormData.UserName);
 
-                if(user!=null)
+                if (user != null)
                 {
                     var result = await _signInManager.PasswordSignInAsync(loginFormData.UserName, loginFormData.Password, false, false);
 
-                    if(result.Succeeded)
+                    if (result.Succeeded)
                     {
                         return RedirectToAction("Index");
                     }
@@ -88,20 +88,42 @@ namespace Splitwise.Core.Controllers
         [HttpPost]
         public async Task<IActionResult> SignUp([FromForm] UserSignUpAC signUpFormData)
         {
-            if(ModelState.IsValid)
+            if (ModelState.IsValid)
             {
-                ApplicationUser newUser = new ApplicationUser { UserName = signUpFormData.UserName, FullName = signUpFormData.FullName };
-                var result = await _userManager.CreateAsync(newUser, signUpFormData.Password);
+                ApplicationUser user = await _userManager.FindByNameAsync(signUpFormData.UserName);
 
-                if (result.Succeeded)
+                if (user == null)
                 {
-                    return RedirectToAction("Index");
+                    ApplicationUser newUser = new ApplicationUser { UserName = signUpFormData.UserName, FullName = signUpFormData.FullName };
+                    var result = await _userManager.CreateAsync(newUser, signUpFormData.Password);
+
+                    if (result.Succeeded)
+                    {
+                        return RedirectToAction("Index");
+                    }
+                    else
+                    {
+                        foreach (var errors in result.Errors)
+                        {
+                            ModelState.AddModelError("", errors.Description);
+                        }
+                    }
                 }
                 else
                 {
-                    foreach (var errors in result.Errors)
+                    user.PasswordHash = _userManager.PasswordHasher.HashPassword(user, signUpFormData.Password);
+                    var result = await _userManager.UpdateAsync(user);
+
+                    if (result.Succeeded)
                     {
-                        ModelState.AddModelError("", errors.Description);
+                        return RedirectToAction("Index");
+                    }
+                    else
+                    {
+                        foreach (var errors in result.Errors)
+                        {
+                            ModelState.AddModelError("", errors.Description);
+                        }
                     }
                 }
             }

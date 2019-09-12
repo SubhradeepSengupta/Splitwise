@@ -144,6 +144,8 @@ namespace Splitwise.Repository.Group
             await _context.UserGroupMappers.AddAsync(newUserGroup);
             await SaveChangesAsync();
 
+            //var allFriends = await _context.Friends.ToListAsync();
+
             for (int i = 0; i < group.UserGroupMapper.Count; i++)
             {
                 var users = await _context.Users.Select(u => u.UserName).ToListAsync();
@@ -166,7 +168,7 @@ namespace Splitwise.Repository.Group
                 }
                 else
                 {
-                    var result = await _userManager.CreateAsync(newUser, "DefaultPassword");
+                    var result = await _userManager.CreateAsync(newUser);
 
                     if (result.Succeeded)
                     {
@@ -211,7 +213,7 @@ namespace Splitwise.Repository.Group
                                     UserName = group.UserGroupMapper[j].UserName
                                 };
 
-                                var result = await _userManager.CreateAsync(newMember, "DefaultPassword");
+                                var result = await _userManager.CreateAsync(newMember);
 
                                 if (result.Succeeded)
                                 {
@@ -250,7 +252,7 @@ namespace Splitwise.Repository.Group
                                     UserName = group.UserGroupMapper[j].UserName
                                 };
 
-                                var result = await _userManager.CreateAsync(newMember, "DefaultPassword");
+                                var result = await _userManager.CreateAsync(newMember);
 
                                 if (result.Succeeded)
                                 {
@@ -298,7 +300,7 @@ namespace Splitwise.Repository.Group
                                 UserName = group.UserGroupMapper[j].UserName
                             };
 
-                            var result = await _userManager.CreateAsync(newMember, "DefaultPassword");
+                            var result = await _userManager.CreateAsync(newMember);
 
                             if (result.Succeeded)
                             {
@@ -408,7 +410,7 @@ namespace Splitwise.Repository.Group
                 }
                 else
                 {
-                    var result = await _userManager.CreateAsync(newUser, "DefaultPassword");
+                    var result = await _userManager.CreateAsync(newUser);
 
                     if (result.Succeeded)
                     {
@@ -453,7 +455,7 @@ namespace Splitwise.Repository.Group
                                     UserName = user[j].UserName
                                 };
 
-                                var result = await _userManager.CreateAsync(newMember, "DefaultPassword");
+                                var result = await _userManager.CreateAsync(newMember);
 
                                 if (result.Succeeded)
                                 {
@@ -492,7 +494,7 @@ namespace Splitwise.Repository.Group
                                     UserName = user[j].UserName
                                 };
 
-                                var result = await _userManager.CreateAsync(newMember, "DefaultPassword");
+                                var result = await _userManager.CreateAsync(newMember);
 
                                 if (result.Succeeded)
                                 {
@@ -535,7 +537,7 @@ namespace Splitwise.Repository.Group
                                 UserName = user[j].UserName
                             };
 
-                            var result = await _userManager.CreateAsync(newMember, "DefaultPassword");
+                            var result = await _userManager.CreateAsync(newMember);
 
                             if (result.Succeeded)
                             {

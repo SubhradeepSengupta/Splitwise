@@ -160,6 +160,7 @@ namespace Splitwise.Repository.Expense
                     UserExpenseMapper userExpenseMapper = new UserExpenseMapper();
 
                     userExpenseMapper.ExpenseID = groupExpenseMapper.ID;
+
                     if (expenses.UserID == null)
                     {
                         userExpenseMapper.FromUser = _userManager.FindByNameAsync(expenses.UserName).Result.Id;
@@ -168,7 +169,15 @@ namespace Splitwise.Repository.Expense
                     {
                         userExpenseMapper.FromUser = expenses.UserID;
                     }
-                    userExpenseMapper.Amount = expenses.UserAmount;
+
+                    if (expense.SplitType.Equals("Equal"))
+                    {
+                        userExpenseMapper.Amount = (expense.Amount/expense.IncludedUsers.Count());
+                    }
+                    else
+                    {
+                        userExpenseMapper.Amount = expenses.UserAmount;
+                    }
 
                     await _context.UserExpenseMappers.AddAsync(userExpenseMapper);
                 }

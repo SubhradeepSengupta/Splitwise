@@ -119,7 +119,7 @@ import { ActivityListComponent } from './users/activity-list/activity-list.compo
                 },
                 {
                     path: '',
-                    redirectTo: 'groups',
+                    redirectTo: 'dashboard',
                     pathMatch: 'full'
                 }])
     ],
