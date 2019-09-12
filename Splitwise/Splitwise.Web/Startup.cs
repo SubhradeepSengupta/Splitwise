@@ -9,6 +9,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.FileProviders;
+using Splitwise.Core.ActionFilters;
 using Splitwise.DomainModel.Models
     ;
 using System.IO;
@@ -60,7 +61,7 @@ namespace Splitwise.Web
                     = new Newtonsoft.Json.Serialization.DefaultContractResolver();
                 });
 
-            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+            services.AddScoped<UserAccessFilter>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

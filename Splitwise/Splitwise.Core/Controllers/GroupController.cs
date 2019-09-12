@@ -7,6 +7,7 @@ using Splitwise.Repository.ApplicationClasses;
 using Splitwise.Repository.Unit;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Splitwise.Core.ActionFilters;
 
 namespace Splitwise.Core.Controllers
 {
@@ -93,6 +94,7 @@ namespace Splitwise.Core.Controllers
             return Ok(group);
         }
 
+        [ServiceFilter(typeof(UserAccessFilter))]
         [HttpPut]
         [Route("groups")]
         public async Task<IActionResult> EditGroupAsync([FromBody] UserGroupAC group)
@@ -106,6 +108,7 @@ namespace Splitwise.Core.Controllers
             return NotFound("Group not found");
         }
 
+        [ServiceFilter(typeof(UserAccessFilter))]
         [HttpDelete]
         [Route("groups/{groupId}")]
         public async Task<IActionResult> DeleteGroupAsync([FromRoute] int groupId)

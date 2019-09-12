@@ -9,6 +9,7 @@ namespace Splitwise.Repository.ApplicationClasses
         public int? GroupID { get; set; }
         public string GroupName { get; set; }
         public string CreatedBy { get; set; }
+        public string CreatedByID { get; set; }
         public DateTime DateCreated { get; set; }
         public int? Category { get; set; }
         public Boolean SimplifyDebts { get; set; }

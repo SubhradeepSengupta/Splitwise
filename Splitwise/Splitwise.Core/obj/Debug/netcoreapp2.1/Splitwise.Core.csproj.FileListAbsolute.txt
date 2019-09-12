@@ -1,5 +1,4 @@
 C:\Users\subhradeep\Desktop\Asp.net Core Test\Splitwise\Splitwise\Splitwise.Core\obj\Debug\netcoreapp2.1\Splitwise.Core.csproj.CoreCompileInputs.cache
-C:\Users\subhradeep\Desktop\Asp.net Core Test\Splitwise\Splitwise\Splitwise.Core\obj\Debug\netcoreapp2.1\UserSecretsAssemblyInfo.cs
 C:\Users\subhradeep\Desktop\Asp.net Core Test\Splitwise\Splitwise\Splitwise.Core\obj\Debug\netcoreapp2.1\Splitwise.Core.AssemblyInfoInputs.cache
 C:\Users\subhradeep\Desktop\Asp.net Core Test\Splitwise\Splitwise\Splitwise.Core\obj\Debug\netcoreapp2.1\Splitwise.Core.AssemblyInfo.cs
 C:\Users\subhradeep\Desktop\Asp.net Core Test\Splitwise\Splitwise\Splitwise.Core\bin\Debug\netcoreapp2.1\Splitwise.Core.deps.json
@@ -15,3 +14,4 @@ C:\Users\subhradeep\Desktop\Asp.net Core Test\Splitwise\Splitwise\Splitwise.Core
 C:\Users\subhradeep\Desktop\Asp.net Core Test\Splitwise\Splitwise\Splitwise.Core\obj\Debug\netcoreapp2.1\Splitwise.Core.csproj.CopyComplete
 C:\Users\subhradeep\Desktop\Asp.net Core Test\Splitwise\Splitwise\Splitwise.Core\obj\Debug\netcoreapp2.1\Splitwise.Core.dll
 C:\Users\subhradeep\Desktop\Asp.net Core Test\Splitwise\Splitwise\Splitwise.Core\obj\Debug\netcoreapp2.1\Splitwise.Core.pdb
+C:\Users\subhradeep\Desktop\Asp.net Core Test\Splitwise\Splitwise\Splitwise.Core\obj\Debug\netcoreapp2.1\UserSecretsAssemblyInfo.cs

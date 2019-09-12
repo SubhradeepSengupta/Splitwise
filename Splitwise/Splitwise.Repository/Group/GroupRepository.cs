@@ -86,6 +86,7 @@ namespace Splitwise.Repository.Group
             {
                 selectedGroup.GroupID = groups.GroupID;
                 selectedGroup.GroupName = groups.Groups.Name;
+                selectedGroup.CreatedByID = groups.Groups.CreatedBy;
                 selectedGroup.CreatedBy = _userManager.FindByIdAsync(group.Groups.CreatedBy).Result.FullName;
                 selectedGroup.DateCreated = groups.Groups.DateCreated;
                 selectedGroup.Category = groups.Groups.Category;
@@ -144,7 +145,7 @@ namespace Splitwise.Repository.Group
             await _context.UserGroupMappers.AddAsync(newUserGroup);
             await SaveChangesAsync();
 
-            //var allFriends = await _context.Friends.ToListAsync();
+            //List<Friend> allFriends = await _context.Friends.ToListAsync();
 
             for (int i = 0; i < group.UserGroupMapper.Count; i++)
             {
