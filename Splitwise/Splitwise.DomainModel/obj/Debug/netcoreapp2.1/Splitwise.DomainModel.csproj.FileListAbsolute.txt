@@ -8,4 +8,3 @@ C:\Users\subhradeep\Desktop\Asp.net Core Test\Splitwise\Splitwise\Splitwise.Doma
 C:\Users\subhradeep\Desktop\Asp.net Core Test\Splitwise\Splitwise\Splitwise.DomainModel\obj\Debug\netcoreapp2.1\Splitwise.DomainModel.AssemblyInfo.cs
 C:\Users\subhradeep\Desktop\Asp.net Core Test\Splitwise\Splitwise\Splitwise.DomainModel\obj\Debug\netcoreapp2.1\Splitwise.DomainModel.dll
 C:\Users\subhradeep\Desktop\Asp.net Core Test\Splitwise\Splitwise\Splitwise.DomainModel\obj\Debug\netcoreapp2.1\Splitwise.DomainModel.pdb
-C:\Users\subhradeep\Desktop\Asp.net Core Test\Splitwise\Splitwise\Splitwise.DomainModel\obj\Debug\netcoreapp2.1\Splitwise.DomainModel.csprojAssemblyReference.cache

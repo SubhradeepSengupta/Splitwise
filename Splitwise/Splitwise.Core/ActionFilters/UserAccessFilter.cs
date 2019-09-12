@@ -1,17 +1,14 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc.Filters;
-using Microsoft.EntityFrameworkCore;
 using Splitwise.DomainModel.Models;
 using Splitwise.Repository.ApplicationClasses;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
-using System.Web.Http;
 
 namespace Splitwise.Core.ActionFilters
 {
-    public class UserAccessFilter : Attribute, IActionFilter
+    public class UserAccessFilter : ActionFilterAttribute
     {
 
         #region Private Variables
@@ -37,10 +34,13 @@ namespace Splitwise.Core.ActionFilters
 
         #region IActionFilter Methods
 
-        public void OnActionExecuting(ActionExecutingContext context)
+        public override void OnActionExecuting(ActionExecutingContext context)
         {
             string actionName = (string)context.RouteData.Values["Action"];
             string currentUserId = _userManager.FindByNameAsync(context.HttpContext.User.Identity.Name).Result.Id;
+            //string actionName = context.ActionDescriptor.ActionName.ToString();
+            //string currentUserId = _userManager.FindByNameAsync(context.RequestContext.Principal.Identity.Name).Result.Id;
+
             List<Group> groupList = _context.Groups.ToList();
 
             if (actionName.Equals("EditGroupAsync"))
@@ -49,11 +49,11 @@ namespace Splitwise.Core.ActionFilters
 
                 if (currentUserId.Equals(model.CreatedByID))
                 {
-                    return;
+                    context.HttpContext.Response.StatusCode = (int)System.Net.HttpStatusCode.Accepted;
                 }
                 else
                 {
-                    throw new HttpResponseException(new HttpResponseMessage(System.Net.HttpStatusCode.Unauthorized));
+                    context.HttpContext.Response.StatusCode = (int)System.Net.HttpStatusCode.Unauthorized;
                 }
             }
             else if (actionName.Equals("DeleteGroupAsync"))
@@ -62,20 +62,16 @@ namespace Splitwise.Core.ActionFilters
 
                 if ((groupList.Where(g => g.ID == groupId).Select(g => g.CreatedBy).FirstOrDefault()).Equals(currentUserId))
                 {
-                    return;
+                    context.HttpContext.Response.StatusCode = (int)System.Net.HttpStatusCode.Accepted;
                 }
                 else
                 {
-                    throw new HttpResponseException(new HttpResponseMessage(System.Net.HttpStatusCode.Unauthorized));
+                    context.HttpContext.Response.StatusCode = (int)System.Net.HttpStatusCode.Unauthorized;
                 }
             }
-        }
 
-        public void OnActionExecuted(ActionExecutedContext context)
-        {
-            return;
+            base.OnActionExecuting(context);
         }
-
         #endregion
     }
 }

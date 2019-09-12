@@ -53,7 +53,7 @@ export class GroupEditComponent implements OnInit {
                 this._router.navigate(['/groups']);
             },
             err => {
-                debugger
+                console.log(err);
             });
     }
 }

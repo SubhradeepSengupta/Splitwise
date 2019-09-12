@@ -1742,7 +1742,7 @@ let GroupEditComponent = class GroupEditComponent {
         this._groupService.EditGroup(groupDetails).subscribe(res => {
             this._router.navigate(['/groups']);
         }, err => {
-            debugger;
+            console.log(err);
         });
     }
 };

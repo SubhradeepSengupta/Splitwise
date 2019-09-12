@@ -1,9 +1,3 @@
-C:\Users\subhradeep\Desktop\Asp.net Core Test\Splitwise\Splitwise\Splitwise.Web\obj\Debug\netcoreapp2.1\Splitwise.Web.csprojAssemblyReference.cache
-C:\Users\subhradeep\Desktop\Asp.net Core Test\Splitwise\Splitwise\Splitwise.Web\obj\Debug\netcoreapp2.1\Splitwise.Web.csproj.CoreCompileInputs.cache
-C:\Users\subhradeep\Desktop\Asp.net Core Test\Splitwise\Splitwise\Splitwise.Web\obj\Debug\netcoreapp2.1\Splitwise.Web.RazorAssemblyInfo.cache
-C:\Users\subhradeep\Desktop\Asp.net Core Test\Splitwise\Splitwise\Splitwise.Web\obj\Debug\netcoreapp2.1\Splitwise.Web.RazorAssemblyInfo.cs
-C:\Users\subhradeep\Desktop\Asp.net Core Test\Splitwise\Splitwise\Splitwise.Web\obj\Debug\netcoreapp2.1\Splitwise.Web.AssemblyInfoInputs.cache
-C:\Users\subhradeep\Desktop\Asp.net Core Test\Splitwise\Splitwise\Splitwise.Web\obj\Debug\netcoreapp2.1\Splitwise.Web.AssemblyInfo.cs
 C:\Users\subhradeep\Desktop\Asp.net Core Test\Splitwise\Splitwise\Splitwise.Web\bin\Debug\netcoreapp2.1\Splitwise.Web.deps.json
 C:\Users\subhradeep\Desktop\Asp.net Core Test\Splitwise\Splitwise\Splitwise.Web\bin\Debug\netcoreapp2.1\Splitwise.Web.runtimeconfig.json
 C:\Users\subhradeep\Desktop\Asp.net Core Test\Splitwise\Splitwise\Splitwise.Web\bin\Debug\netcoreapp2.1\Splitwise.Web.runtimeconfig.dev.json
@@ -17,6 +11,12 @@ C:\Users\subhradeep\Desktop\Asp.net Core Test\Splitwise\Splitwise\Splitwise.Web\
 C:\Users\subhradeep\Desktop\Asp.net Core Test\Splitwise\Splitwise\Splitwise.Web\bin\Debug\netcoreapp2.1\Splitwise.Core.pdb
 C:\Users\subhradeep\Desktop\Asp.net Core Test\Splitwise\Splitwise\Splitwise.Web\bin\Debug\netcoreapp2.1\Splitwise.DomainModel.pdb
 C:\Users\subhradeep\Desktop\Asp.net Core Test\Splitwise\Splitwise\Splitwise.Web\bin\Debug\netcoreapp2.1\I.pdb
+C:\Users\subhradeep\Desktop\Asp.net Core Test\Splitwise\Splitwise\Splitwise.Web\obj\Debug\netcoreapp2.1\Splitwise.Web.csprojAssemblyReference.cache
+C:\Users\subhradeep\Desktop\Asp.net Core Test\Splitwise\Splitwise\Splitwise.Web\obj\Debug\netcoreapp2.1\Splitwise.Web.csproj.CoreCompileInputs.cache
+C:\Users\subhradeep\Desktop\Asp.net Core Test\Splitwise\Splitwise\Splitwise.Web\obj\Debug\netcoreapp2.1\Splitwise.Web.RazorAssemblyInfo.cache
+C:\Users\subhradeep\Desktop\Asp.net Core Test\Splitwise\Splitwise\Splitwise.Web\obj\Debug\netcoreapp2.1\Splitwise.Web.RazorAssemblyInfo.cs
+C:\Users\subhradeep\Desktop\Asp.net Core Test\Splitwise\Splitwise\Splitwise.Web\obj\Debug\netcoreapp2.1\Splitwise.Web.AssemblyInfoInputs.cache
+C:\Users\subhradeep\Desktop\Asp.net Core Test\Splitwise\Splitwise\Splitwise.Web\obj\Debug\netcoreapp2.1\Splitwise.Web.AssemblyInfo.cs
 C:\Users\subhradeep\Desktop\Asp.net Core Test\Splitwise\Splitwise\Splitwise.Web\obj\Debug\netcoreapp2.1\Splitwise.Web.TagHelpers.input.cache
 C:\Users\subhradeep\Desktop\Asp.net Core Test\Splitwise\Splitwise\Splitwise.Web\obj\Debug\netcoreapp2.1\Splitwise.Web.TagHelpers.output.cache
 C:\Users\subhradeep\Desktop\Asp.net Core Test\Splitwise\Splitwise\Splitwise.Web\obj\Debug\netcoreapp2.1\Splitwise.Web.RazorCoreGenerate.cache
