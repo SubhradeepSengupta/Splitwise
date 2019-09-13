@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 using Splitwise.DomainModel.Models;
 using Splitwise.Repository.ApplicationClasses;
@@ -50,10 +51,12 @@ namespace Splitwise.Core.ActionFilters
                 if (currentUserId.Equals(model.CreatedByID))
                 {
                     context.HttpContext.Response.StatusCode = (int)System.Net.HttpStatusCode.Accepted;
+                    context.Result = new EmptyResult();
                 }
                 else
                 {
                     context.HttpContext.Response.StatusCode = (int)System.Net.HttpStatusCode.Unauthorized;
+                    context.Result = new EmptyResult();
                 }
             }
             else if (actionName.Equals("DeleteGroupAsync"))
@@ -63,10 +66,12 @@ namespace Splitwise.Core.ActionFilters
                 if ((groupList.Where(g => g.ID == groupId).Select(g => g.CreatedBy).FirstOrDefault()).Equals(currentUserId))
                 {
                     context.HttpContext.Response.StatusCode = (int)System.Net.HttpStatusCode.Accepted;
+                    context.Result = new EmptyResult();
                 }
                 else
                 {
                     context.HttpContext.Response.StatusCode = (int)System.Net.HttpStatusCode.Unauthorized;
+                    context.Result = new EmptyResult();
                 }
             }
 
