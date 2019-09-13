@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Splitwise.Core.ActionFilters;
 using Splitwise.DomainModel.Models;
 using Splitwise.Repository.ApplicationClasses;
 using Splitwise.Repository.Unit;
@@ -45,28 +46,28 @@ namespace Splitwise.Core.Controllers
 
         [HttpGet]
         [Route("groups/{groupId}/expenses")]
-        public async Task<IActionResult> GetAllExpenses([FromRoute] int groupId)
+        public async Task<IActionResult> GetAllExpensesAsync([FromRoute] int groupId)
         {
             return Ok(await unitOfWork.Expense.GetAllExpensesAsync(groupId));
         }
 
         [HttpGet]
         [Route("groups/{groupId}/expenses/{expenseId}")]
-        public async Task<IActionResult> GetExpenseByid([FromRoute] int groupId, [FromRoute] int expenseId)
+        public async Task<IActionResult> GetExpenseByIdAsync([FromRoute] int groupId, [FromRoute] int expenseId)
         {
             return Ok(await unitOfWork.Expense.GetExpenseByIdAsync(groupId, expenseId));
         }
 
         [HttpGet]
         [Route("groups/{groupId}/expenses/{payerId}/{payeeId}")]
-        public async Task<IActionResult> GetExpenseByUser([FromRoute] int groupId, [FromRoute] string payerId, [FromRoute] string payeeId)
+        public async Task<IActionResult> GetExpenseByUserAsync([FromRoute] int groupId, [FromRoute] string payerId, [FromRoute] string payeeId)
         {
             return Ok(await unitOfWork.Expense.GetExpenseByUserAsync(groupId, payerId, payeeId));
         }
 
         [HttpPost]
         [Route("groups/{groupId}/expenses")]
-        public async Task<IActionResult> CreateExpense([FromRoute] int groupId, [FromBody] CreateExpenseAC expense)
+        public async Task<IActionResult> CreateExpenseAsync([FromRoute] int groupId, [FromBody] CreateExpenseAC expense)
         {
             string currentUserId = _userManager.FindByNameAsync(User.Identity.Name).Result.Id;
             await unitOfWork.Expense.CreateExpenseAsync(groupId, currentUserId, expense);
@@ -74,9 +75,10 @@ namespace Splitwise.Core.Controllers
             return Ok(expense);
         }
 
+        [ServiceFilter(typeof(UserAccessFilter))]
         [HttpPut]
         [Route("groups/{groupId}/expenses")]
-        public async Task<IActionResult> EditExpense([FromRoute] int groupId, [FromBody] IndividualExpenseAC expense)
+        public async Task<IActionResult> EditExpenseAsync([FromRoute] int groupId, [FromBody] IndividualExpenseAC expense)
         {
             var returnValue = await unitOfWork.Expense.EditExpenseAsync(groupId, expense);
             if (returnValue)
@@ -90,9 +92,10 @@ namespace Splitwise.Core.Controllers
             }
         }
 
+        [ServiceFilter(typeof(UserAccessFilter))]
         [HttpDelete]
         [Route("groups/{groupId}/expenses/{expenseId}")]
-        public async Task<IActionResult> RemoveExpense([FromRoute] int groupId, [FromRoute] int expenseId)
+        public async Task<IActionResult> RemoveExpenseAsync([FromRoute] int groupId, [FromRoute] int expenseId)
         {
             string currentUserId = _userManager.FindByNameAsync(User.Identity.Name).Result.Id;
             var returnValue = await unitOfWork.Expense.DeleteExpenseAsync(groupId, currentUserId, expenseId);
@@ -109,12 +112,13 @@ namespace Splitwise.Core.Controllers
 
         [HttpGet]
         [Route("non-group-expenses")]
-        public async Task<IActionResult> GetNonGroupExpenses()
+        public async Task<IActionResult> GetNonGroupExpensesAsync()
         {
             var loggenInUserId = _userManager.FindByNameAsync(User.Identity.Name).Result.Id;
             return Ok(await unitOfWork.Expense.GetAllNonGroupExpenses(loggenInUserId));
         }
 
+        [ServiceFilter(typeof(UserAccessFilter))]
         [HttpPost]
         [Route("settlement")]
         public async Task<IActionResult> SettlementAsync([FromBody] SettlementAC settlement)

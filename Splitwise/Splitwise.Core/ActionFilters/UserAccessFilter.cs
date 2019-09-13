@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
+using Microsoft.EntityFrameworkCore;
 using Splitwise.DomainModel.Models;
 using Splitwise.Repository.ApplicationClasses;
 using System.Collections.Generic;
@@ -37,44 +38,92 @@ namespace Splitwise.Core.ActionFilters
 
         public override void OnActionExecuting(ActionExecutingContext context)
         {
+            string controllerName = (string)context.RouteData.Values["Controller"];
             string actionName = (string)context.RouteData.Values["Action"];
             string currentUserId = _userManager.FindByNameAsync(context.HttpContext.User.Identity.Name).Result.Id;
-            //string actionName = context.ActionDescriptor.ActionName.ToString();
-            //string currentUserId = _userManager.FindByNameAsync(context.RequestContext.Principal.Identity.Name).Result.Id;
 
-            List<Group> groupList = _context.Groups.ToList();
-
-            if (actionName.Equals("EditGroupAsync"))
+            if (controllerName.Equals("Group"))
             {
-                UserGroupAC model = context.ActionArguments["group"] as UserGroupAC;
+                List<Group> groupList = _context.Groups.ToList();
 
-                if (currentUserId.Equals(model.CreatedByID))
+                if (actionName.Equals("EditGroupAsync"))
                 {
-                    context.HttpContext.Response.StatusCode = (int)System.Net.HttpStatusCode.Accepted;
-                    context.Result = new EmptyResult();
+                    UserGroupAC model = context.ActionArguments["group"] as UserGroupAC;
+
+                    if (currentUserId.Equals(model.CreatedByID))
+                    {
+                        context.HttpContext.Response.StatusCode = (int)System.Net.HttpStatusCode.Accepted;
+                    }
+                    else
+                    {
+                        context.HttpContext.Response.StatusCode = (int)System.Net.HttpStatusCode.Unauthorized;
+                        context.Result = new EmptyResult();
+                    }
                 }
-                else
+                else if (actionName.Equals("DeleteGroupAsync"))
                 {
-                    context.HttpContext.Response.StatusCode = (int)System.Net.HttpStatusCode.Unauthorized;
-                    context.Result = new EmptyResult();
+                    int groupId = (int)context.ActionArguments["groupId"];
+
+                    if ((groupList.Where(g => g.ID == groupId).Select(g => g.CreatedBy).FirstOrDefault()).Equals(currentUserId))
+                    {
+                        context.HttpContext.Response.StatusCode = (int)System.Net.HttpStatusCode.Accepted;
+                    }
+                    else
+                    {
+                        context.HttpContext.Response.StatusCode = (int)System.Net.HttpStatusCode.Unauthorized;
+                        context.Result = new EmptyResult();
+                    }
                 }
             }
-            else if (actionName.Equals("DeleteGroupAsync"))
+            else if (controllerName.Equals("Expense"))
             {
-                int groupId = (int)context.ActionArguments["groupId"];
+                if (actionName.Equals("EditExpenseAsync"))
+                {
+                    int groupId = (int)context.ActionArguments["groupId"];
+                    IndividualExpenseAC expense = context.ActionArguments["expense"] as IndividualExpenseAC;
 
-                if ((groupList.Where(g => g.ID == groupId).Select(g => g.CreatedBy).FirstOrDefault()).Equals(currentUserId))
-                {
-                    context.HttpContext.Response.StatusCode = (int)System.Net.HttpStatusCode.Accepted;
-                    context.Result = new EmptyResult();
+                    if (expense.Payer.Any(p => p.UserID.Equals(currentUserId)))
+                    {
+                        context.HttpContext.Response.StatusCode = (int)System.Net.HttpStatusCode.Accepted;
+                    }
+                    else
+                    {
+                        context.HttpContext.Response.StatusCode = (int)System.Net.HttpStatusCode.Unauthorized;
+                        context.Result = new EmptyResult();
+                    }
                 }
-                else
+                else if (actionName.Equals("RemoveExpenseAsync"))
                 {
-                    context.HttpContext.Response.StatusCode = (int)System.Net.HttpStatusCode.Unauthorized;
-                    context.Result = new EmptyResult();
+                    int groupId = (int)context.ActionArguments["groupId"];
+                    int expenseId = (int)context.ActionArguments["expenseId"];
+
+                    List<string> payersId = _context.UserExpenseMappers.Where(e => e.ExpenseID == expenseId).Select(e => e.FromUser).ToList();
+
+                    if (payersId.Contains(currentUserId))
+                    {
+                        context.HttpContext.Response.StatusCode = (int)System.Net.HttpStatusCode.Accepted;
+                    }
+                    else
+                    {
+                        context.HttpContext.Response.StatusCode = (int)System.Net.HttpStatusCode.Unauthorized;
+                        context.Result = new EmptyResult();
+                    }
+                }
+                else if (actionName.Equals("SettlementAsync"))
+                {
+                    SettlementAC settlement = context.ActionArguments["settlement"] as SettlementAC;
+
+                    if(settlement.Payee.Equals(currentUserId) || settlement.Payer.Equals(currentUserId))
+                    {
+                        context.HttpContext.Response.StatusCode = (int)System.Net.HttpStatusCode.Accepted;
+                    }
+                    else
+                    {
+                        context.HttpContext.Response.StatusCode = (int)System.Net.HttpStatusCode.Unauthorized;
+                        context.Result = new EmptyResult();
+                    }
                 }
             }
-
             base.OnActionExecuting(context);
         }
         #endregion
